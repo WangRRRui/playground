@@ -1,0 +1,572 @@
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post | Rui的Playground</title>
+    
+    <!-- Design Specification Comments -->
+    <!--
+    Design Style: Cyberpunk/Hacker Aesthetic (Dark Mode)
+    Primary Colors: 
+      - Background: #0a0a0a (Deep Dark)
+      - Accents: #00ff41 (Neon Green), #00f3ff (Cyber Blue), #bc13fe (Neon Purple)
+      - Text: #e0e0e0 (Light Gray), #ffffff (White)
+    Typography: 
+      - Headers/Code: 'JetBrains Mono', monospace
+      - Body: 'Inter', sans-serif
+    Visual Elements:
+      - Glitch effects
+      - Terminal-like command prompts
+      - Glowing borders
+      - Matrix-style backgrounds
+    -->
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="assets/css/fonts.css">
+
+    <!-- Icons -->
+    <script src="assets/js/lucide.min.js"></script>
+
+    <!-- API Client -->
+    <script src="assets/js/api.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="assets/css/tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#0a0a0a',
+                            dark: '#111111',
+                            gray: '#1a1a1a',
+                            light: '#e0e0e0',
+                            green: '#00ff41',
+                            blue: '#00f3ff',
+                            purple: '#bc13fe',
+                            red: '#ff003c'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'glitch': 'glitch 1s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'cursor': 'cursor .75s step-end infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                            '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                            '62%': { transform: 'translate(0,0) skew(5deg)' },
+                        },
+                        cursor: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Marked.js for Markdown Rendering -->
+    <script src="assets/js/marked.min.js"></script>
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="assets/css/prism-tomorrow.css" rel="stylesheet" />
+    <script src="assets/js/prism.min.js"></script>
+    <script src="assets/js/prism-python.min.js"></script>
+    <script src="assets/js/prism-bash.min.js"></script>
+    <script src="assets/js/prism-json.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --sb-track-color: #0a0a0a;
+            --sb-thumb-color: #00ff41;
+            --sb-size: 5px;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: var(--sb-size);
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 2px;
+            box-shadow: 0 0 10px #00ff41;
+        }
+
+        /* Glitch Effect Classes */
+        .glitch-text {
+            position: relative;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff003c;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #00f3ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(30px, 9999px, 10px, 0); }
+            5% { clip: rect(80px, 9999px, 90px, 0); }
+            10% { clip: rect(10px, 9999px, 40px, 0); }
+            15% { clip: rect(50px, 9999px, 20px, 0); }
+            20% { clip: rect(60px, 9999px, 70px, 0); }
+            100% { clip: rect(20px, 9999px, 50px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(10px, 9999px, 80px, 0); }
+            5% { clip: rect(40px, 9999px, 10px, 0); }
+            10% { clip: rect(90px, 9999px, 30px, 0); }
+            15% { clip: rect(20px, 9999px, 60px, 0); }
+            20% { clip: rect(70px, 9999px, 50px, 0); }
+            100% { clip: rect(50px, 9999px, 20px, 0); }
+        }
+
+        /* Matrix Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        /* Scanline Effect */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 9999;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0, 255, 65, 0.04) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: fixed;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+
+        /* Markdown Content Styles */
+        .markdown-content {
+            color: #e0e0e0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        .markdown-content h1, 
+        .markdown-content h2, 
+        .markdown-content h3, 
+        .markdown-content h4, 
+        .markdown-content h5, 
+        .markdown-content h6 {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffffff;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        .markdown-content h1 { font-size: 2.5rem; border-bottom: 1px solid #1a1a1a; padding-bottom: 0.5rem; }
+        .markdown-content h2 { font-size: 2rem; color: #00ff41; }
+        .markdown-content h3 { font-size: 1.5rem; color: #00f3ff; }
+        
+        .markdown-content p { margin-bottom: 1.5rem; }
+        
+        .markdown-content a {
+            color: #00f3ff;
+            text-decoration: none;
+            border-bottom: 1px dashed #00f3ff;
+            transition: all 0.2s;
+        }
+        .markdown-content a:hover {
+            background: rgba(0, 243, 255, 0.1);
+            color: #fff;
+        }
+        
+        .markdown-content ul, .markdown-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .markdown-content ul { list-style-type: disc; }
+        .markdown-content ol { list-style-type: decimal; }
+        .markdown-content li { margin-bottom: 0.5rem; }
+        .markdown-content li::marker { color: #00ff41; }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid #bc13fe;
+            background: rgba(188, 19, 254, 0.05);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: #d1d5db;
+        }
+        
+        .markdown-content code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1a1a1a;
+            color: #00ff41;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+        
+        .markdown-content pre {
+            background: #111111 !important;
+            border: 1px solid #333;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem !important;
+            overflow-x: auto;
+        }
+        .markdown-content pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        .markdown-content img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            border: 1px solid #333;
+            margin: 2rem 0;
+        }
+        
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .markdown-content th, .markdown-content td {
+            border: 1px solid #333;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .markdown-content th {
+            background: #1a1a1a;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .markdown-content tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: #00ff41;
+            z-index: 100;
+            width: 0%;
+            box-shadow: 0 0 10px #00ff41;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Scanline Overlay -->
+    <div class="scanline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2 group">
+                        <div class="w-8 h-8 bg-cyber-green/10 border border-cyber-green flex items-center justify-center rounded-sm group-hover:bg-cyber-green/20 transition-all">
+                            <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
+                        </div>
+                        <span class="font-mono font-bold text-xl text-white tracking-tighter group-hover:text-cyber-green transition-colors">Rui's<span class="text-cyber-green">Playground</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="font-mono text-gray-300 hover:text-cyber-green hover:border-b-2 hover:border-cyber-green px-3 py-2 rounded-md text-sm font-medium transition-all">~/home</a>
+                        <a href="blog.html" class="font-mono text-cyber-blue px-3 py-2 rounded-md text-sm font-medium border-b-2 border-cyber-blue">~/blog</a>
+                        <a href="tags.html" class="font-mono text-gray-300 hover:text-cyber-purple hover:border-b-2 hover:border-cyber-purple px-3 py-2 rounded-md text-sm font-medium transition-all">~/tags</a>
+                        <a href="about.html" class="font-mono text-gray-300 hover:text-cyber-red hover:border-b-2 hover:border-cyber-red px-3 py-2 rounded-md text-sm font-medium transition-all">~/about</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-300 hover:text-white p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-16">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Article Header -->
+            <header id="post-header" class="mb-12 border-b border-gray-800 pb-8">
+                <div class="flex items-center gap-2 mb-4">
+                    <a href="blog.html" class="text-cyber-green hover:underline font-mono text-sm">&lt; BACK_TO_LOGS</a>
+                </div>
+
+                <div id="post-tags" class="flex flex-wrap gap-2 mb-6">
+                    <!-- Tags will be loaded dynamically -->
+                </div>
+
+                <h1 id="post-title" class="text-3xl md:text-5xl font-bold text-white font-mono mb-6 leading-tight glitch-text" data-text="Loading...">
+                    Loading...
+                </h1>
+
+                <div class="flex items-center justify-between text-sm text-gray-400 font-mono">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gray-800 overflow-hidden border border-cyber-green">
+                                <img src="assets/images/avatar.png" alt="Author" class="w-full h-full object-cover">
+                            </div>
+                            <span id="post-author" class="text-white">Admin</span>
+                        </div>
+                        <span>|</span>
+                        <span id="post-date">----</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span id="post-read-time">5 MIN READ</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Featured Image -->
+            <div id="post-cover" class="mb-12 relative rounded-sm overflow-hidden border border-gray-800 group hidden">
+                <img id="post-cover-img" src="" alt="" class="w-full h-auto object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
+            </div>
+
+            <!-- Markdown Content Container -->
+            <div id="markdown-content" class="markdown-content">
+                <!-- Content will be injected here by JS -->
+            </div>
+
+            <!-- Article Footer -->
+            <footer class="mt-16 pt-8 border-t border-gray-800">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="font-mono text-gray-400 text-sm">
+                        SHARE_TRANSMISSION:
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="text-gray-400 hover:text-cyber-blue transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></button>
+                        <button class="text-gray-400 hover:text-cyber-purple transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></button>
+                        <button class="text-gray-400 hover:text-cyber-green transition-colors"><i data-lucide="link" class="w-5 h-5"></i></button>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="#" class="group p-4 border border-gray-800 hover:border-cyber-green bg-cyber-gray/30 transition-all rounded-sm">
+                        <div class="text-xs text-gray-500 font-mono mb-1 group-hover:text-cyber-green">&lt; PREVIOUS_LOG</div>
+                        <div class="text-white font-bold truncate">Introduction to Large Language Models</div>
+                    </a>
+                    <a href="#" class="group p-4 border border-gray-800 hover:border-cyber-blue bg-cyber-gray/30 transition-all rounded-sm text-right">
+                        <div class="text-xs text-gray-500 font-mono mb-1 group-hover:text-cyber-blue">NEXT_LOG &gt;</div>
+                        <div class="text-white font-bold truncate">Memory Systems in LLMs: Vector DBs vs. Graph DBs</div>
+                    </a>
+                </div>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cyber-dark border-t border-gray-800 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
+                        <span class="font-mono font-bold text-lg text-white">Rui's<span class="text-cyber-green">Playground</span></span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-mono">© 2024 Autonomous Systems. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-cyber-green transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-cyber-blue transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-cyber-purple transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Load post from API
+        async function loadPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+
+            if (!slug) {
+                document.getElementById('post-title').textContent = 'Post Not Found';
+                document.getElementById('markdown-content').innerHTML = '<p class="text-gray-500">No post slug specified in URL.</p>';
+                return;
+            }
+
+            try {
+                const post = await BlogAPI.getPost(slug);
+
+                // Update page title
+                document.title = `${post.title} | Agent.EXE`;
+
+                // Update header
+                document.getElementById('post-title').textContent = post.title;
+                document.getElementById('post-title').setAttribute('data-text', post.title);
+                document.getElementById('post-author').textContent = post.author || 'Admin';
+                document.getElementById('post-date').textContent = post.published_at
+                    ? new Date(post.published_at).toISOString().split('T')[0]
+                    : 'DRAFT';
+                document.getElementById('post-read-time').textContent = post.read_time || '5 MIN READ';
+
+                // Update tags
+                const tagColors = ['green', 'blue', 'purple', 'red'];
+                document.getElementById('post-tags').innerHTML = post.tags.map((tag, i) => {
+                    const color = tag.color || tagColors[i % tagColors.length];
+                    return `<span class="px-2 py-1 bg-cyber-${color}/10 text-cyber-${color} text-xs font-mono border border-cyber-${color}/30 rounded">#${tag.name.toUpperCase()}</span>`;
+                }).join('');
+
+                // Update cover image
+                if (post.cover_image) {
+                    const coverDiv = document.getElementById('post-cover');
+                    const coverImg = document.getElementById('post-cover-img');
+                    coverImg.src = post.cover_image;
+                    coverImg.alt = post.title;
+                    coverDiv.classList.remove('hidden');
+                }
+
+                // Render Markdown content
+                document.getElementById('markdown-content').innerHTML = marked.parse(post.content);
+
+                // Re-highlight code blocks
+                if (typeof Prism !== 'undefined') {
+                    Prism.highlightAll();
+                }
+
+                lucide.createIcons();
+            } catch (error) {
+                console.error('Failed to load post:', error);
+                document.getElementById('post-title').textContent = 'Post Not Found';
+                document.getElementById('post-title').setAttribute('data-text', 'Post Not Found');
+                document.getElementById('markdown-content').innerHTML = `<p class="text-gray-500">Could not load the post. The API may be offline or the post doesn't exist.</p>`;
+            }
+        }
+
+        // Initialize
+        loadPost();
+
+        // Matrix Background Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width/fontSize;
+
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0'; // Green text
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>

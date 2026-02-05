@@ -1,0 +1,496 @@
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rui的Playground | Tech Blog</title>
+    
+    <!-- Design Specification Comments -->
+    <!--
+    Design Style: Cyberpunk/Hacker Aesthetic (Dark Mode)
+    Primary Colors: 
+      - Background: #0a0a0a (Deep Dark)
+      - Accents: #00ff41 (Neon Green), #00f3ff (Cyber Blue), #bc13fe (Neon Purple)
+      - Text: #e0e0e0 (Light Gray), #ffffff (White)
+    Typography: 
+      - Headers/Code: 'JetBrains Mono', monospace
+      - Body: 'Inter', sans-serif
+    Visual Elements:
+      - Glitch effects
+      - Terminal-like command prompts
+      - Glowing borders
+      - Matrix-style backgrounds
+    -->
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="assets/css/fonts.css">
+
+    <!-- Icons -->
+    <script src="assets/js/lucide.min.js"></script>
+
+    <!-- API Client -->
+    <script src="assets/js/api.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="assets/css/tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#0a0a0a',
+                            dark: '#111111',
+                            gray: '#1a1a1a',
+                            light: '#e0e0e0',
+                            green: '#00ff41',
+                            blue: '#00f3ff',
+                            purple: '#bc13fe',
+                            red: '#ff003c'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'glitch': 'glitch 1s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'cursor': 'cursor .75s step-end infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                            '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                            '62%': { transform: 'translate(0,0) skew(5deg)' },
+                        },
+                        cursor: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --sb-track-color: #0a0a0a;
+            --sb-thumb-color: #00ff41;
+            --sb-size: 5px;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: var(--sb-size);
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 2px;
+            box-shadow: 0 0 10px #00ff41;
+        }
+
+        /* Glitch Effect Classes */
+        .glitch-text {
+            position: relative;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff003c;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #00f3ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(30px, 9999px, 10px, 0); }
+            5% { clip: rect(80px, 9999px, 90px, 0); }
+            10% { clip: rect(10px, 9999px, 40px, 0); }
+            15% { clip: rect(50px, 9999px, 20px, 0); }
+            20% { clip: rect(60px, 9999px, 70px, 0); }
+            100% { clip: rect(20px, 9999px, 50px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(10px, 9999px, 80px, 0); }
+            5% { clip: rect(40px, 9999px, 10px, 0); }
+            10% { clip: rect(90px, 9999px, 30px, 0); }
+            15% { clip: rect(20px, 9999px, 60px, 0); }
+            20% { clip: rect(70px, 9999px, 50px, 0); }
+            100% { clip: rect(50px, 9999px, 20px, 0); }
+        }
+
+        /* Neon Glow Utilities */
+        .glow-green { box-shadow: 0 0 10px rgba(0, 255, 65, 0.5); }
+        .glow-blue { box-shadow: 0 0 10px rgba(0, 243, 255, 0.5); }
+        .glow-purple { box-shadow: 0 0 10px rgba(188, 19, 254, 0.5); }
+        
+        .hover-glow-green:hover { box-shadow: 0 0 15px rgba(0, 255, 65, 0.8); }
+        .hover-glow-blue:hover { box-shadow: 0 0 15px rgba(0, 243, 255, 0.8); }
+        
+        .text-shadow-green { text-shadow: 0 0 5px rgba(0, 255, 65, 0.8); }
+        .text-shadow-blue { text-shadow: 0 0 5px rgba(0, 243, 255, 0.8); }
+
+        /* Matrix Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        /* Scanline Effect */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 9999;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0, 255, 65, 0.04) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: fixed;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+
+        /* Card Hover Effect */
+        .cyber-card {
+            transition: all 0.3s ease;
+            border: 1px solid #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .cyber-card:hover::before {
+            left: 100%;
+        }
+        .cyber-card:hover {
+            border-color: #00ff41;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Scanline Overlay -->
+    <div class="scanline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2 group">
+                        <div class="w-8 h-8 bg-cyber-green/10 border border-cyber-green flex items-center justify-center rounded-sm group-hover:bg-cyber-green/20 transition-all">
+                            <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
+                        </div>
+                        <span class="font-mono font-bold text-xl text-white tracking-tighter group-hover:text-cyber-green transition-colors">Rui's<span class="text-cyber-green">Playground</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="font-mono text-cyber-green px-3 py-2 rounded-md text-sm font-medium border-b-2 border-cyber-green">~/home</a>
+                        <a href="blog.html" class="font-mono text-gray-300 hover:text-cyber-blue hover:border-b-2 hover:border-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-all">~/blog</a>
+                        <a href="tags.html" class="font-mono text-gray-300 hover:text-cyber-purple hover:border-b-2 hover:border-cyber-purple px-3 py-2 rounded-md text-sm font-medium transition-all">~/tags</a>
+                        <a href="about.html" class="font-mono text-gray-300 hover:text-cyber-red hover:border-b-2 hover:border-cyber-red px-3 py-2 rounded-md text-sm font-medium transition-all">~/about</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-300 hover:text-white p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyber-green/30 bg-cyber-green/5 text-cyber-green text-xs font-mono mb-6 animate-pulse-slow">
+                    <span class="w-2 h-2 rounded-full bg-cyber-green"></span>
+                    SYSTEM ONLINE // READY
+                </div>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 font-mono">
+                    <span class="glitch-text block" data-text="HELLO_WORLD">HELLO_WORLD</span>
+                    <span class="text-cyber-green text-2xl sm:text-4xl mt-2 block font-normal typing-effect">I build autonomous agents.</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 font-light">
+                    Exploring the frontier of <span class="text-cyber-blue">Artificial Intelligence</span>, <span class="text-cyber-purple">LLMs</span>, and <span class="text-cyber-green">Autonomous Systems</span>.
+                </p>
+                <div class="mt-10 flex justify-center gap-4">
+                    <a href="blog.html" class="group relative px-8 py-3 bg-cyber-green/10 border border-cyber-green text-cyber-green font-mono font-bold hover:bg-cyber-green hover:text-black transition-all duration-300 clip-path-slant">
+                        <span class="absolute -inset-1 bg-cyber-green/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        READ_LOGS()
+                    </a>
+                    <a href="about.html" class="px-8 py-3 border border-gray-700 text-gray-300 font-mono hover:border-cyber-blue hover:text-cyber-blue transition-all duration-300">
+                        WHOAMI
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/2 left-10 w-24 h-24 border-t-2 border-l-2 border-cyber-green/20 rounded-tl-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-24 h-24 border-b-2 border-r-2 border-cyber-blue/20 rounded-br-3xl"></div>
+    </header>
+
+    <!-- Latest Posts Section -->
+    <section class="py-16 bg-cyber-dark/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-12">
+                <h2 class="text-2xl font-bold text-white font-mono flex items-center gap-3">
+                    <i data-lucide="cpu" class="text-cyber-green"></i>
+                    LATEST_TRANSMISSIONS
+                </h2>
+                <a href="blog.html" class="text-sm font-mono text-cyber-blue hover:text-white transition-colors flex items-center gap-1">
+                    VIEW_ALL_LOGS <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div id="latest-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Posts will be loaded dynamically -->
+                <div class="col-span-full text-center py-8 text-gray-500 font-mono">Loading transmissions...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Tags Section -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-cyber-green/5 skew-y-3 transform origin-top-left scale-110"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-bold text-white font-mono mb-2">
+                    <span class="text-cyber-purple">&lt;</span>POPULAR_TAGS<span class="text-cyber-purple">/&gt;</span>
+                </h2>
+                <p class="text-gray-400 text-sm">Navigate the knowledge graph</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="tags.html" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-sm hover:border-cyber-green hover:text-cyber-green hover:shadow-[0_0_10px_rgba(0,255,65,0.3)] transition-all">#LLM</a>
+                <a href="tags.html" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-sm hover:border-cyber-blue hover:text-cyber-blue hover:shadow-[0_0_10px_rgba(0,243,255,0.3)] transition-all">#AGENTS</a>
+                <a href="tags.html" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-sm hover:border-cyber-purple hover:text-cyber-purple hover:shadow-[0_0_10px_rgba(188,19,254,0.3)] transition-all">#PYTHON</a>
+                <a href="tags.html" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-sm hover:border-cyber-red hover:text-cyber-red hover:shadow-[0_0_10px_rgba(255,0,60,0.3)] transition-all">#SECURITY</a>
+                <a href="tags.html" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-sm hover:border-cyber-green hover:text-cyber-green hover:shadow-[0_0_10px_rgba(0,255,65,0.3)] transition-all">#LANGCHAIN</a>
+                <a href="tags.html" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-sm hover:border-cyber-blue hover:text-cyber-blue hover:shadow-[0_0_10px_rgba(0,243,255,0.3)] transition-all">#OPENAI</a>
+                <a href="tags.html" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-sm hover:border-cyber-purple hover:text-cyber-purple hover:shadow-[0_0_10px_rgba(188,19,254,0.3)] transition-all">#RAG</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter/Terminal Section -->
+    <section class="py-16 border-t border-gray-800">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-black border border-gray-800 rounded-md overflow-hidden shadow-2xl">
+                <div class="bg-gray-900 px-4 py-2 flex items-center gap-2 border-b border-gray-800">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 text-xs text-gray-500 font-mono">bash — 80x24</span>
+                </div>
+                <div class="p-6 font-mono text-sm">
+                    <div class="mb-4">
+                        <span class="text-cyber-green">user@agent-exe:~$</span> <span class="text-white">./subscribe.sh --email</span>
+                    </div>
+                    <div class="mb-4 text-gray-400">
+                        Initializing subscription protocol...<br>
+                        Connecting to neural network...<br>
+                        Enter your email to receive weekly intelligence briefings:
+                    </div>
+                    <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Subscription protocol initiated.');">
+                        <span class="text-cyber-green animate-pulse">></span>
+                        <input type="email" placeholder="your_email@domain.com" class="bg-transparent border-none outline-none text-white w-full focus:ring-0 placeholder-gray-600">
+                        <button type="submit" class="text-cyber-blue hover:text-white hover:underline">ENTER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cyber-dark border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
+                        <span class="font-mono font-bold text-lg text-white">Rui's<span class="text-cyber-green">Playground</span></span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-mono">© 2024 Autonomous Systems. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-cyber-green transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-cyber-blue transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-cyber-purple transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-cyber-red transition-colors">
+                        <i data-lucide="rss" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Matrix Background Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width/fontSize;
+
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0'; // Green text
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Load latest posts from API
+        async function loadLatestPosts() {
+            const container = document.getElementById('latest-posts');
+            const colors = ['green', 'blue', 'purple'];
+
+            try {
+                const posts = await BlogAPI.getLatestPosts(3);
+
+                if (posts.length === 0) {
+                    container.innerHTML = '<div class="col-span-full text-center py-8 text-gray-500 font-mono">No transmissions found.</div>';
+                    return;
+                }
+
+                container.innerHTML = posts.map((post, index) => {
+                    const color = colors[index % colors.length];
+                    const date = post.published_at ? new Date(post.published_at).toISOString().split('T')[0] : 'DRAFT';
+                    const tags = post.tags.slice(0, 2).map(t =>
+                        `<span class="text-xs font-mono text-cyber-${t.color || 'green'} bg-cyber-${t.color || 'green'}/10 px-2 py-1 rounded">#${t.name.toUpperCase()}</span>`
+                    ).join('');
+
+                    return `
+                        <article class="cyber-card bg-cyber-gray rounded-sm group h-full flex flex-col">
+                            <a href="post.html?slug=${post.slug}" class="block relative h-48 overflow-hidden border-b border-gray-800">
+                                ${post.cover_image
+                                    ? `<img src="${post.cover_image}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">`
+                                    : `<div class="w-full h-full bg-gray-900 flex items-center justify-center"><i data-lucide="file-text" class="w-16 h-16 text-gray-800 group-hover:text-cyber-${color} transition-colors"></i></div>`
+                                }
+                                ${post.version ? `<div class="absolute top-2 right-2 bg-black/80 border border-cyber-${color} text-cyber-${color} text-xs font-mono px-2 py-1">${post.version}</div>` : ''}
+                            </a>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <div class="flex items-center gap-2 mb-3 text-xs font-mono text-gray-500">
+                                    <span class="text-cyber-${color}">${date}</span>
+                                    <span>//</span>
+                                    <span>${post.read_time || '5 MIN READ'}</span>
+                                </div>
+                                <a href="post.html?slug=${post.slug}">
+                                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-${color} transition-colors font-mono">${post.title}</h3>
+                                </a>
+                                <p class="text-gray-400 text-sm mb-4 flex-1 line-clamp-3">${post.excerpt || ''}</p>
+                                <div class="flex flex-wrap gap-2 mt-auto">${tags}</div>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+
+                // Reinitialize Lucide icons for new content
+                lucide.createIcons();
+            } catch (error) {
+                console.error('Failed to load posts:', error);
+                container.innerHTML = '<div class="col-span-full text-center py-8 text-gray-500 font-mono">Failed to load transmissions. API may be offline.</div>';
+            }
+        }
+
+        // Initialize
+        loadLatestPosts();
+    </script>
+</body>
+</html>

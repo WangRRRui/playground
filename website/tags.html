@@ -1,0 +1,473 @@
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags | Rui的Playground</title>
+    
+    <!-- Design Specification Comments -->
+    <!--
+    Design Style: Cyberpunk/Hacker Aesthetic (Dark Mode)
+    Primary Colors: 
+      - Background: #0a0a0a (Deep Dark)
+      - Accents: #00ff41 (Neon Green), #00f3ff (Cyber Blue), #bc13fe (Neon Purple)
+      - Text: #e0e0e0 (Light Gray), #ffffff (White)
+    Typography: 
+      - Headers/Code: 'JetBrains Mono', monospace
+      - Body: 'Inter', sans-serif
+    Visual Elements:
+      - Glitch effects
+      - Terminal-like command prompts
+      - Glowing borders
+      - Matrix-style backgrounds
+    -->
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="assets/css/fonts.css">
+
+    <!-- Icons -->
+    <script src="assets/js/lucide.min.js"></script>
+
+    <!-- API Client -->
+    <script src="assets/js/api.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="assets/css/tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#0a0a0a',
+                            dark: '#111111',
+                            gray: '#1a1a1a',
+                            light: '#e0e0e0',
+                            green: '#00ff41',
+                            blue: '#00f3ff',
+                            purple: '#bc13fe',
+                            red: '#ff003c'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    animation: {
+                        'glitch': 'glitch 1s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'cursor': 'cursor .75s step-end infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                            '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                            '62%': { transform: 'translate(0,0) skew(5deg)' },
+                        },
+                        cursor: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --sb-track-color: #0a0a0a;
+            --sb-thumb-color: #00ff41;
+            --sb-size: 5px;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: var(--sb-size);
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 2px;
+            box-shadow: 0 0 10px #00ff41;
+        }
+
+        /* Glitch Effect Classes */
+        .glitch-text {
+            position: relative;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff003c;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #00f3ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(30px, 9999px, 10px, 0); }
+            5% { clip: rect(80px, 9999px, 90px, 0); }
+            10% { clip: rect(10px, 9999px, 40px, 0); }
+            15% { clip: rect(50px, 9999px, 20px, 0); }
+            20% { clip: rect(60px, 9999px, 70px, 0); }
+            100% { clip: rect(20px, 9999px, 50px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(10px, 9999px, 80px, 0); }
+            5% { clip: rect(40px, 9999px, 10px, 0); }
+            10% { clip: rect(90px, 9999px, 30px, 0); }
+            15% { clip: rect(20px, 9999px, 60px, 0); }
+            20% { clip: rect(70px, 9999px, 50px, 0); }
+            100% { clip: rect(50px, 9999px, 20px, 0); }
+        }
+
+        /* Matrix Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        /* Scanline Effect */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 9999;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0, 255, 65, 0.04) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: fixed;
+            bottom: 100%;
+            animation: scanline 10s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+
+        /* Card Hover Effect */
+        .cyber-card {
+            transition: all 0.3s ease;
+            border: 1px solid #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .cyber-card:hover::before {
+            left: 100%;
+        }
+        .cyber-card:hover {
+            border-color: #00ff41;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Scanline Overlay -->
+    <div class="scanline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-2 group">
+                        <div class="w-8 h-8 bg-cyber-green/10 border border-cyber-green flex items-center justify-center rounded-sm group-hover:bg-cyber-green/20 transition-all">
+                            <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
+                        </div>
+                        <span class="font-mono font-bold text-xl text-white tracking-tighter group-hover:text-cyber-green transition-colors">Rui's<span class="text-cyber-green">Playground</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="font-mono text-gray-300 hover:text-cyber-green hover:border-b-2 hover:border-cyber-green px-3 py-2 rounded-md text-sm font-medium transition-all">~/home</a>
+                        <a href="blog.html" class="font-mono text-gray-300 hover:text-cyber-blue hover:border-b-2 hover:border-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-all">~/blog</a>
+                        <a href="tags.html" class="font-mono text-cyber-purple px-3 py-2 rounded-md text-sm font-medium border-b-2 border-cyber-purple">~/tags</a>
+                        <a href="about.html" class="font-mono text-gray-300 hover:text-cyber-red hover:border-b-2 hover:border-cyber-red px-3 py-2 rounded-md text-sm font-medium transition-all">~/about</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-300 hover:text-white p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header -->
+            <div class="mb-12 text-center">
+                <h1 class="text-4xl font-bold text-white font-mono mb-4 glitch-text" data-text="KNOWLEDGE_GRAPH">KNOWLEDGE_GRAPH</h1>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Navigate the neural network of topics. Select a node to filter transmissions.
+                </p>
+            </div>
+
+            <!-- Tag Cloud -->
+            <div id="tag-cloud" class="mb-16 p-8 bg-cyber-gray/30 border border-gray-800 rounded-sm relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-green via-cyber-blue to-cyber-purple opacity-50"></div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="text-gray-500 font-mono">Loading tags...</span>
+                </div>
+            </div>
+
+            <!-- Grouped Posts -->
+            <div id="grouped-posts" class="space-y-16">
+                <div class="text-center py-8 text-gray-500 font-mono">Loading transmissions...</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cyber-dark border-t border-gray-800 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
+                        <span class="font-mono font-bold text-lg text-white">Rui's<span class="text-cyber-green">Playground</span></span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-mono">© 2024 Autonomous Systems. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-cyber-green transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-cyber-blue transition-colors">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-cyber-purple transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Matrix Background Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width/fontSize;
+
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0'; // Green text
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Color mapping for tags
+        const tagColors = ['green', 'blue', 'purple', 'red'];
+
+        // Load tag cloud
+        async function loadTagCloud() {
+            const container = document.getElementById('tag-cloud');
+
+            try {
+                const tags = await BlogAPI.getTags();
+
+                if (tags.length === 0) {
+                    container.innerHTML = `
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-green via-cyber-blue to-cyber-purple opacity-50"></div>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <span class="text-gray-500 font-mono">No tags found.</span>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Sort by post count
+                const sortedTags = [...tags].sort((a, b) => b.post_count - a.post_count);
+
+                const tagsHtml = sortedTags.map((tag, index) => {
+                    const color = tag.color || tagColors[index % tagColors.length];
+                    const isLarge = tag.post_count >= 5;
+                    const isMedium = tag.post_count >= 2 && tag.post_count < 5;
+
+                    if (isLarge) {
+                        return `<a href="#${tag.name}" class="px-6 py-3 bg-cyber-gray border border-cyber-${color} text-cyber-${color} font-mono text-lg font-bold hover:bg-cyber-${color} hover:text-black hover:shadow-[0_0_15px_rgba(0,255,65,0.4)] transition-all transform hover:scale-105">
+                            #${tag.name.toUpperCase()} <span class="text-xs opacity-70 ml-1">[${tag.post_count}]</span>
+                        </a>`;
+                    } else if (isMedium) {
+                        return `<a href="#${tag.name}" class="px-4 py-2 bg-cyber-gray border border-gray-700 text-gray-300 font-mono hover:border-cyber-${color} hover:text-cyber-${color} hover:shadow-[0_0_10px_rgba(0,255,65,0.3)] transition-all">
+                            #${tag.name.toUpperCase()} <span class="text-xs opacity-50 ml-1">[${tag.post_count}]</span>
+                        </a>`;
+                    } else {
+                        return `<a href="#${tag.name}" class="px-3 py-1 bg-cyber-gray border border-gray-800 text-gray-400 font-mono text-sm hover:border-cyber-${color} hover:text-cyber-${color} transition-all">#${tag.name.toUpperCase()}</a>`;
+                    }
+                }).join('');
+
+                container.innerHTML = `
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-green via-cyber-blue to-cyber-purple opacity-50"></div>
+                    <div class="flex flex-wrap justify-center gap-4">${tagsHtml}</div>
+                `;
+
+                // Load posts grouped by tag
+                loadGroupedPosts(tags);
+            } catch (error) {
+                console.error('Failed to load tags:', error);
+                container.innerHTML = `
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-green via-cyber-blue to-cyber-purple opacity-50"></div>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="text-gray-500 font-mono">Failed to load tags. API may be offline.</span>
+                    </div>
+                `;
+            }
+        }
+
+        // Load posts grouped by tag
+        async function loadGroupedPosts(tags) {
+            const container = document.getElementById('grouped-posts');
+
+            // Filter tags with posts
+            const tagsWithPosts = tags.filter(t => t.post_count > 0);
+
+            if (tagsWithPosts.length === 0) {
+                container.innerHTML = '<div class="text-center py-8 text-gray-500 font-mono">No posts found.</div>';
+                return;
+            }
+
+            let html = '';
+
+            for (let i = 0; i < Math.min(tagsWithPosts.length, 5); i++) {
+                const tag = tagsWithPosts[i];
+                const color = tag.color || tagColors[i % tagColors.length];
+
+                try {
+                    const data = await BlogAPI.getPostsByTag(tag.name);
+                    const posts = data.items.slice(0, 4);
+
+                    const postsHtml = posts.map(post => {
+                        const date = post.published_at ? new Date(post.published_at).toISOString().split('T')[0] : 'DRAFT';
+                        return `
+                            <a href="post.html?slug=${post.slug}" class="flex gap-4 group">
+                                <div class="w-24 h-24 flex-shrink-0 overflow-hidden rounded-sm border border-gray-800 group-hover:border-cyber-${color} transition-colors ${post.cover_image ? '' : 'bg-gray-900 flex items-center justify-center'}">
+                                    ${post.cover_image
+                                        ? `<img src="${post.cover_image}" alt="Thumbnail" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity">`
+                                        : `<i data-lucide="file-text" class="text-gray-700 group-hover:text-cyber-${color}"></i>`
+                                    }
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white font-mono mb-1 group-hover:text-cyber-${color} transition-colors">${post.title}</h3>
+                                    <div class="text-xs text-gray-500 font-mono mb-2">${date}</div>
+                                    <p class="text-sm text-gray-400 line-clamp-2">${post.excerpt || ''}</p>
+                                </div>
+                            </a>
+                        `;
+                    }).join('');
+
+                    html += `
+                        <div id="${tag.name}" class="scroll-mt-24">
+                            <div class="flex items-center gap-4 mb-8 border-b border-gray-800 pb-4">
+                                <h2 class="text-2xl font-bold text-white font-mono">
+                                    <span class="text-cyber-${color}">#</span>${tag.name.toUpperCase()}
+                                </h2>
+                                <span class="text-gray-500 font-mono text-sm">${tag.post_count} TRANSMISSION${tag.post_count !== 1 ? 'S' : ''}</span>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">${postsHtml}</div>
+                        </div>
+                    `;
+                } catch (error) {
+                    console.error(`Failed to load posts for tag ${tag.name}:`, error);
+                }
+            }
+
+            container.innerHTML = html || '<div class="text-center py-8 text-gray-500 font-mono">No posts found.</div>';
+            lucide.createIcons();
+        }
+
+        // Initialize
+        loadTagCloud();
+    </script>
+</body>
+</html>

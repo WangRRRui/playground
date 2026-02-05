@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Rui的Playground</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        h1, h2, h3, .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glow-border { border: 1px solid #00ff41; box-shadow: 0 0 10px rgba(0, 255, 65, 0.2); }
+        .btn-primary { background: #00ff41; color: #000; }
+        .btn-primary:hover { background: #00cc33; }
+        .btn-danger { background: #ff003c; color: #fff; }
+        .btn-danger:hover { background: #cc0030; }
+        .badge { padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .badge-published { background: #00ff41; color: #000; }
+        .badge-draft { background: #333; color: #888; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #222; }
+        th { color: #00ff41; font-family: 'JetBrains Mono', monospace; }
+        tr:hover { background: #111; }
+    </style>
+</head>
+<body>
+    <div class="max-w-6xl mx-auto p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-800">
+            <h1 class="text-2xl text-[#00ff41]">[ ADMIN DASHBOARD ]</h1>
+            <div class="flex gap-4">
+                <a href="/admin/post-edit.html" class="btn-primary px-4 py-2 rounded font-mono text-sm">+ NEW POST</a>
+                <a href="/admin/about-edit.html" class="px-4 py-2 rounded border border-[#00f3ff] text-[#00f3ff] hover:bg-[#00f3ff] hover:text-black text-sm font-mono">EDIT ABOUT</a>
+                <button id="logoutBtn" class="px-4 py-2 rounded border border-gray-600 text-gray-400 hover:text-white text-sm">LOGOUT</button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-4 mb-8">
+            <div class="bg-[#111] p-4 rounded glow-border">
+                <div class="text-gray-500 text-sm mb-1">TOTAL POSTS</div>
+                <div id="totalPosts" class="text-2xl text-[#00ff41] font-mono">-</div>
+            </div>
+            <div class="bg-[#111] p-4 rounded glow-border">
+                <div class="text-gray-500 text-sm mb-1">PUBLISHED</div>
+                <div id="publishedPosts" class="text-2xl text-[#00f3ff] font-mono">-</div>
+            </div>
+            <div class="bg-[#111] p-4 rounded glow-border">
+                <div class="text-gray-500 text-sm mb-1">DRAFTS</div>
+                <div id="draftPosts" class="text-2xl text-gray-500 font-mono">-</div>
+            </div>
+        </div>
+
+        <!-- Posts Table -->
+        <div class="bg-[#111] rounded glow-border">
+            <table>
+                <thead>
+                    <tr class="bg-[#0a0a0a]">
+                        <th>TITLE</th>
+                        <th>STATUS</th>
+                        <th>DATE</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="postsTable">
+                    <tr><td colspan="4" class="text-center text-gray-500 py-8">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="flex justify-center gap-2 mt-6"></div>
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1';
+        const token = localStorage.getItem('token');
+        let currentPage = 1;
+
+        // Check auth
+        if (!token) {
+            window.location.href = '/admin/login.html';
+        }
+
+        // Auth header
+        const authHeaders = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = '/admin/login.html';
+        });
+
+        // Fetch posts
+        async function fetchPosts(page = 1) {
+            try {
+                const res = await fetch(`${API_BASE}/posts?page=${page}&page_size=10&published_only=false`, {
+                    headers: authHeaders
+                });
+
+                if (res.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/admin/login.html';
+                    return;
+                }
+
+                const data = await res.json();
+                renderPosts(data.items);
+                renderPagination(data.total_pages, page);
+                updateStats(data);
+            } catch (err) {
+                console.error('Failed to fetch posts:', err);
+            }
+        }
+
+        // Update stats
+        function updateStats(data) {
+            const published = data.items.filter(p => p.is_published).length;
+            document.getElementById('totalPosts').textContent = data.total;
+            document.getElementById('publishedPosts').textContent = published;
+            document.getElementById('draftPosts').textContent = data.total - published;
+        }
+
+        // Render posts table
+        function renderPosts(posts) {
+            const tbody = document.getElementById('postsTable');
+
+            if (posts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-gray-500 py-8">No posts yet. Create your first post!</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = posts.map(post => `
+                <tr>
+                    <td>
+                        <div class="font-medium">${escapeHtml(post.title)}</div>
+                        <div class="text-gray-500 text-sm">${post.slug}</div>
+                    </td>
+                    <td>
+                        <span class="badge ${post.is_published ? 'badge-published' : 'badge-draft'}">
+                            ${post.is_published ? 'PUBLISHED' : 'DRAFT'}
+                        </span>
+                    </td>
+                    <td class="text-gray-400 text-sm">
+                        ${new Date(post.created_at).toLocaleDateString()}
+                    </td>
+                    <td>
+                        <div class="flex gap-2">
+                            <a href="/admin/post-edit.html?slug=${post.slug}" class="text-[#00f3ff] hover:underline text-sm">Edit</a>
+                            <button onclick="deletePost('${post.slug}')" class="text-[#ff003c] hover:underline text-sm">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Render pagination
+        function renderPagination(totalPages, current) {
+            const container = document.getElementById('pagination');
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const active = i === current ? 'bg-[#00ff41] text-black' : 'bg-[#222] text-gray-400 hover:bg-[#333]';
+                html += `<button onclick="goToPage(${i})" class="${active} px-3 py-1 rounded font-mono text-sm">${i}</button>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            fetchPosts(page);
+        }
+
+        // Delete post
+        async function deletePost(slug) {
+            if (!confirm(`Delete post "${slug}"?`)) return;
+
+            try {
+                const res = await fetch(`${API_BASE}/posts/${slug}`, {
+                    method: 'DELETE',
+                    headers: authHeaders
+                });
+
+                if (res.ok) {
+                    fetchPosts(currentPage);
+                } else {
+                    alert('Failed to delete post');
+                }
+            } catch (err) {
+                console.error('Delete error:', err);
+            }
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initial load
+        fetchPosts();
+    </script>
+</body>
+</html>

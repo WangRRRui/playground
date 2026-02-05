@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit About | Rui的Playground Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { background: #0a0a0a; color: #e0e0e0; font-family: 'Inter', sans-serif; min-height: 100vh; }
+        h1, h2, h3, .font-mono { font-family: 'JetBrains Mono', monospace; }
+        input, textarea { background: #111; border: 1px solid #333; color: #e0e0e0; }
+        input:focus, textarea:focus { border-color: #00ff41; outline: none; }
+        .btn-primary { background: #00ff41; color: #000; }
+        .btn-primary:hover { background: #00cc33; }
+        .btn-secondary { background: #333; color: #fff; }
+        .btn-secondary:hover { background: #444; }
+        .skill-chip { display: inline-flex; align-items: center; gap: 4px; background: #222; padding: 4px 10px; border-radius: 4px; font-size: 13px; border: 1px solid #333; }
+        .skill-chip button { color: #ff003c; font-weight: bold; }
+        .preview-content h1 { font-size: 1.8em; font-weight: bold; margin: 0.5em 0; color: #00ff41; }
+        .preview-content h2 { font-size: 1.4em; font-weight: bold; margin: 0.5em 0; color: #00f3ff; }
+        .preview-content p { margin: 0.8em 0; line-height: 1.6; }
+        .preview-content ul { margin: 0.8em 0; padding-left: 1.5em; }
+        .preview-content li { margin: 0.3em 0; }
+        .preview-content a { color: #00f3ff; }
+    </style>
+</head>
+<body>
+    <div class="max-w-4xl mx-auto p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-800">
+            <h1 class="text-xl text-[#00ff41]">[ EDIT ABOUT ]</h1>
+            <a href="/admin/" class="px-4 py-2 rounded border border-gray-600 text-gray-400 hover:text-white text-sm">BACK</a>
+        </div>
+
+        <form id="aboutForm" class="space-y-6">
+            <!-- Basic Info -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm mb-2 text-gray-400">NAME</label>
+                    <input type="text" id="name" class="w-full px-4 py-2 rounded" placeholder="Your Name">
+                </div>
+                <div>
+                    <label class="block text-sm mb-2 text-gray-400">TITLE / ROLE</label>
+                    <input type="text" id="title" class="w-full px-4 py-2 rounded" placeholder="AI Engineer / Developer">
+                </div>
+            </div>
+
+            <!-- Avatar -->
+            <div>
+                <label class="block text-sm mb-2 text-gray-400">AVATAR URL</label>
+                <div class="flex gap-4 items-center">
+                    <input type="text" id="avatar" class="flex-1 px-4 py-2 rounded" placeholder="/uploads/avatar.png">
+                    <div id="avatarPreview" class="w-16 h-16 rounded-full bg-gray-800 border border-gray-700 overflow-hidden">
+                        <img id="avatarImg" src="" class="w-full h-full object-cover hidden">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bio (Markdown) -->
+            <div>
+                <label class="block text-sm mb-2 text-gray-400">BIO (MARKDOWN)</label>
+                <div class="grid grid-cols-2 gap-4">
+                    <textarea id="bio" class="w-full px-4 py-3 rounded h-64 font-mono text-sm" placeholder="Write your bio in Markdown..."></textarea>
+                    <div class="bg-[#111] rounded p-4 h-64 overflow-auto border border-gray-800">
+                        <div class="text-xs text-gray-500 mb-2">PREVIEW</div>
+                        <div id="bioPreview" class="preview-content text-sm"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div>
+                <label class="block text-sm mb-2 text-gray-400">SKILLS / TAGS</label>
+                <div id="skillsContainer" class="flex gap-2 flex-wrap mb-2"></div>
+                <div class="flex gap-2">
+                    <input type="text" id="newSkill" class="flex-1 px-4 py-2 rounded" placeholder="Add skill (e.g., Python, LLM, FastAPI)">
+                    <button type="button" onclick="addSkill()" class="btn-secondary px-4 py-2 rounded">ADD</button>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div>
+                <label class="block text-sm mb-2 text-gray-400">EDUCATION</label>
+                <div id="educationContainer" class="space-y-3 mb-3"></div>
+                <button type="button" onclick="addEducation()" class="btn-secondary px-4 py-2 rounded text-sm">+ ADD EDUCATION</button>
+            </div>
+
+            <!-- Work Experience -->
+            <div>
+                <label class="block text-sm mb-2 text-gray-400">WORK EXPERIENCE</label>
+                <div id="experienceContainer" class="space-y-3 mb-3"></div>
+                <button type="button" onclick="addExperience()" class="btn-secondary px-4 py-2 rounded text-sm">+ ADD EXPERIENCE</button>
+            </div>
+
+            <!-- Social Links -->
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm mb-2 text-gray-400">GITHUB</label>
+                    <input type="text" id="social_github" class="w-full px-4 py-2 rounded" placeholder="https://github.com/username">
+                </div>
+                <div>
+                    <label class="block text-sm mb-2 text-gray-400">TWITTER / X</label>
+                    <input type="text" id="social_twitter" class="w-full px-4 py-2 rounded" placeholder="https://twitter.com/username">
+                </div>
+                <div>
+                    <label class="block text-sm mb-2 text-gray-400">EMAIL</label>
+                    <input type="text" id="social_email" class="w-full px-4 py-2 rounded" placeholder="you@example.com">
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-4 pt-4 border-t border-gray-800">
+                <button type="submit" class="btn-primary px-6 py-3 rounded font-mono">
+                    SAVE CHANGES
+                </button>
+                <span id="saveStatus" class="text-gray-500 text-sm self-center"></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1';
+        const token = localStorage.getItem('token');
+        let skills = [];
+        let education = [];
+        let experience = [];
+
+        // Check auth
+        if (!token) {
+            window.location.href = '/admin/login.html';
+        }
+
+        const authHeaders = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+
+        // Live preview for bio
+        document.getElementById('bio').addEventListener('input', (e) => {
+            document.getElementById('bioPreview').innerHTML = marked.parse(e.target.value || '');
+        });
+
+        // Avatar preview
+        document.getElementById('avatar').addEventListener('input', (e) => {
+            const img = document.getElementById('avatarImg');
+            if (e.target.value) {
+                img.src = e.target.value;
+                img.classList.remove('hidden');
+            } else {
+                img.classList.add('hidden');
+            }
+        });
+
+        // Skills management
+        function addSkill() {
+            const input = document.getElementById('newSkill');
+            const skill = input.value.trim();
+            if (skill && !skills.includes(skill)) {
+                skills.push(skill);
+                renderSkills();
+            }
+            input.value = '';
+        }
+
+        function removeSkill(index) {
+            skills.splice(index, 1);
+            renderSkills();
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skillsContainer');
+            container.innerHTML = skills.map((skill, i) => `
+                <span class="skill-chip">
+                    ${skill}
+                    <button type="button" onclick="removeSkill(${i})">&times;</button>
+                </span>
+            `).join('');
+        }
+
+        document.getElementById('newSkill').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addSkill();
+            }
+        });
+
+        // Education management
+        function addEducation() {
+            education.push({ period: '', title: '', org: '', desc: '' });
+            renderEducation();
+        }
+
+        function removeEducation(index) {
+            education.splice(index, 1);
+            renderEducation();
+        }
+
+        function updateEducation(index, field, value) {
+            education[index][field] = value;
+        }
+
+        function renderEducation() {
+            const container = document.getElementById('educationContainer');
+            container.innerHTML = education.map((item, i) => `
+                <div class="bg-[#111] border border-gray-700 rounded p-4 relative">
+                    <button type="button" onclick="removeEducation(${i})" class="absolute top-2 right-2 text-[#ff003c] text-xl">&times;</button>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <input type="text" value="${item.period}" onchange="updateEducation(${i}, 'period', this.value)" class="px-3 py-2 rounded text-sm" placeholder="Period (e.g., 2018 - 2022)">
+                        <input type="text" value="${item.org}" onchange="updateEducation(${i}, 'org', this.value)" class="px-3 py-2 rounded text-sm" placeholder="School / University">
+                    </div>
+                    <input type="text" value="${item.title}" onchange="updateEducation(${i}, 'title', this.value)" class="w-full px-3 py-2 rounded text-sm mb-3" placeholder="Degree / Major">
+                    <textarea onchange="updateEducation(${i}, 'desc', this.value)" class="w-full px-3 py-2 rounded text-sm h-16" placeholder="Description (optional)">${item.desc}</textarea>
+                </div>
+            `).join('');
+        }
+
+        // Experience management
+        function addExperience() {
+            experience.push({ period: '', title: '', org: '', desc: '' });
+            renderExperience();
+        }
+
+        function removeExperience(index) {
+            experience.splice(index, 1);
+            renderExperience();
+        }
+
+        function updateExperience(index, field, value) {
+            experience[index][field] = value;
+        }
+
+        function renderExperience() {
+            const container = document.getElementById('experienceContainer');
+            container.innerHTML = experience.map((item, i) => `
+                <div class="bg-[#111] border border-gray-700 rounded p-4 relative">
+                    <button type="button" onclick="removeExperience(${i})" class="absolute top-2 right-2 text-[#ff003c] text-xl">&times;</button>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <input type="text" value="${item.period}" onchange="updateExperience(${i}, 'period', this.value)" class="px-3 py-2 rounded text-sm" placeholder="Period (e.g., 2022 - Present)">
+                        <input type="text" value="${item.org}" onchange="updateExperience(${i}, 'org', this.value)" class="px-3 py-2 rounded text-sm" placeholder="Company">
+                    </div>
+                    <input type="text" value="${item.title}" onchange="updateExperience(${i}, 'title', this.value)" class="w-full px-3 py-2 rounded text-sm mb-3" placeholder="Job Title">
+                    <textarea onchange="updateExperience(${i}, 'desc', this.value)" class="w-full px-3 py-2 rounded text-sm h-16" placeholder="Description">${item.desc}</textarea>
+                </div>
+            `).join('');
+        }
+
+        // Load existing data
+        async function loadAbout() {
+            try {
+                const res = await fetch(`${API_BASE}/settings/about`);
+                if (!res.ok) return;
+
+                const data = await res.json();
+                document.getElementById('name').value = data.name || '';
+                document.getElementById('title').value = data.title || '';
+                document.getElementById('bio').value = data.bio || '';
+                document.getElementById('avatar').value = data.avatar || '';
+                document.getElementById('social_github').value = data.social_github || '';
+                document.getElementById('social_twitter').value = data.social_twitter || '';
+                document.getElementById('social_email').value = data.social_email || '';
+
+                skills = data.skills || [];
+                education = data.education || [];
+                experience = data.experience || [];
+                renderSkills();
+                renderEducation();
+                renderExperience();
+
+                // Trigger previews
+                document.getElementById('bio').dispatchEvent(new Event('input'));
+                document.getElementById('avatar').dispatchEvent(new Event('input'));
+            } catch (error) {
+                console.error('Failed to load about:', error);
+            }
+        }
+
+        // Save
+        document.getElementById('aboutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const status = document.getElementById('saveStatus');
+            status.textContent = 'Saving...';
+
+            const data = {
+                name: document.getElementById('name').value,
+                title: document.getElementById('title').value,
+                bio: document.getElementById('bio').value,
+                avatar: document.getElementById('avatar').value,
+                skills: skills,
+                education: education,
+                experience: experience,
+                social_github: document.getElementById('social_github').value,
+                social_twitter: document.getElementById('social_twitter').value,
+                social_email: document.getElementById('social_email').value,
+            };
+
+            try {
+                const res = await fetch(`${API_BASE}/settings/about`, {
+                    method: 'PUT',
+                    headers: authHeaders,
+                    body: JSON.stringify(data)
+                });
+
+                if (!res.ok) throw new Error('Save failed');
+
+                status.textContent = 'Saved!';
+                status.classList.remove('text-red-500');
+                status.classList.add('text-green-500');
+                setTimeout(() => {
+                    status.textContent = '';
+                    status.classList.remove('text-green-500');
+                }, 2000);
+            } catch (error) {
+                status.textContent = 'Save failed!';
+                status.classList.add('text-red-500');
+                console.error(error);
+            }
+        });
+
+        // Initialize
+        loadAbout();
+    </script>
+</body>
+</html>

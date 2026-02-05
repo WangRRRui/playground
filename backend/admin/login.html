@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Rui的Playground</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'JetBrains Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .glow-green { box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); }
+        .glow-green:focus { box-shadow: 0 0 30px rgba(0, 255, 65, 0.5); }
+        input { background: #111; border: 1px solid #333; color: #e0e0e0; }
+        input:focus { border-color: #00ff41; outline: none; }
+    </style>
+</head>
+<body>
+    <div class="w-full max-w-md p-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-[#00ff41] mb-2">[ ADMIN ACCESS ]</h1>
+            <p class="text-gray-500">Enter password to continue</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+            <div>
+                <label class="block text-sm mb-2 text-gray-400">PASSWORD</label>
+                <input
+                    type="password"
+                    id="password"
+                    class="w-full px-4 py-3 rounded glow-green"
+                    placeholder="Enter admin password..."
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <div id="error" class="text-red-500 text-sm hidden"></div>
+
+            <button
+                type="submit"
+                class="w-full bg-[#00ff41] text-black py-3 rounded font-bold hover:bg-[#00cc33] transition"
+            >
+                LOGIN
+            </button>
+        </form>
+
+        <div class="mt-8 text-center text-gray-600 text-xs">
+            <span class="text-[#00ff41]">&gt;</span> Unauthorized access prohibited
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1';
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error');
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                if (!res.ok) {
+                    const data = await res.json();
+                    throw new Error(data.detail || 'Login failed');
+                }
+
+                const data = await res.json();
+                localStorage.setItem('token', data.access_token);
+                window.location.href = '/admin/';
+            } catch (err) {
+                errorDiv.textContent = err.message;
+                errorDiv.classList.remove('hidden');
+            }
+        });
+
+        // Check if already logged in
+        if (localStorage.getItem('token')) {
+            window.location.href = '/admin/';
+        }
+    </script>
+</body>
+</html>
