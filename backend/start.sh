@@ -3,6 +3,9 @@
 
 cd "$(dirname "$0")"
 
+# 添加常见的用户bin目录到PATH
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
 # 检查 uv 是否安装
 if ! command -v uv &> /dev/null; then
     echo "Error: uv not found. Install it with: curl -LsSf https://astral.sh/uv/install.sh | sh"
@@ -22,9 +25,11 @@ fi
 echo "Syncing dependencies..."
 uv sync
 
-# 启动服务
+# 启动服务（后台运行）
 echo "Starting server at http://localhost:8000"
 echo "API docs: http://localhost:8000/docs"
 echo "Admin: http://localhost:8000/admin/login.html"
 echo ""
-uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+nohup uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 > server.log 2>&1 &
+echo "Server started in background. PID: $!"
+echo "Logs: $(dirname "$0")/server.log"
