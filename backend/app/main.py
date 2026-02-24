@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
 from app.database import init_db
 from app.config import UPLOAD_DIR, BASE_DIR
 from app.auth import verify_password, create_access_token
 from app.schemas import LoginRequest, TokenResponse
 from app.routers import posts, tags, upload, settings
+
+# Website directory (sibling to backend)
+WEBSITE_DIR = BASE_DIR.parent / "website"
 
 # Create FastAPI app
 app = FastAPI(
@@ -41,12 +43,6 @@ def startup():
     init_db()
 
 
-@app.get("/")
-def root():
-    """Redirect to API docs."""
-    return RedirectResponse(url="/docs")
-
-
 @app.post("/api/v1/auth/login", response_model=TokenResponse)
 def login(request: LoginRequest):
     """Login with admin password to get JWT token."""
@@ -64,3 +60,8 @@ def login(request: LoginRequest):
 def health_check():
     """Health check endpoint."""
     return {"status": "ok"}
+
+
+# Mount website static files LAST (fallback for all other routes)
+# html=True serves index.html for "/" and allows .html file access
+app.mount("/", StaticFiles(directory=str(WEBSITE_DIR), html=True), name="website")

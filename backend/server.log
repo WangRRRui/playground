@@ -1,0 +1,180 @@
+INFO:     Will watch for changes in these directories: ['/Users/wangrui/prompt_engineering/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [81153] using WatchFiles
+INFO:     Started server process [81155]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:50021 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50021 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50021 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50627 - "GET /blog.html HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50627 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50629 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50641 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50641 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50641 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50767 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50769 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /tags.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50781 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=AI+Agent HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=LLM HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=Tool+Design HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=Prompt+Engineering HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "GET /about.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50781 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50809 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50811 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50915 - "GET /index.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50915 - "GET /api/v1/posts/latest?limit=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50916 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50916 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50915 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50915 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50915 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50915 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52814 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52814 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52814 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52814 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52814 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52814 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54226 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54226 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54226 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55119 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55119 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55119 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56160 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56202 - "GET /admin/login.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56202 - "GET /admin/ HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56202 - "GET /api/v1/posts?page=1&page_size=10&published_only=false HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56231 - "GET /admin/post-edit.html?slug=agent-tool-design-methodology HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56231 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64196 - "POST /api/v1/posts HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65268 - "POST /api/v1/posts HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:65304 - "POST /api/v1/posts HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:65344 - "POST /api/v1/posts HTTP/1.1" 201 Created
+INFO:     127.0.0.1:65416 - "POST /api/v1/posts HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:65470 - "POST /api/v1/posts HTTP/1.1" 201 Created
+INFO:     127.0.0.1:49395 - "GET /post.html?slug=agent-tool-design-methodology HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49395 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49395 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49395 - "GET /blog.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49395 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49396 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49446 - "GET /post.html?slug=agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49446 - "GET /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49448 - "GET /tool_scaling_strategies.png HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49451 - "GET /multi_agent_architecture.png HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49452 - "GET /tool_search_workflow.png HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49446 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49548 - "GET /api/v1/posts/agent-tool-design-methodology HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49548 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49719 - "GET /blog.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:49719 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49721 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49727 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49734 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49741 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49747 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49863 - "PUT /api/v1/posts/3 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49889 - "PUT /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49955 - "PUT /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50091 - "GET /blog.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50091 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50092 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50092 - "GET /uploads/570eb394cb534a22be34cc2ba2ce642a.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50092 - "GET /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50092 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50101 - "GET /uploads/afdeaeabdfda4c55a464c4fe09e05c36.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50091 - "GET /uploads/a21c9f5acbe94086b186b1b5cecbb5d5.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50102 - "GET /uploads/f46488a821fa4496a61f6807effa98bd.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50490 - "PUT /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50661 - "GET /post.html?slug=agent-tool-design-guide HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50661 - "GET /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50661 - "GET /uploads/570eb394cb534a22be34cc2ba2ce642a.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50661 - "GET /uploads/f46488a821fa4496a61f6807effa98bd.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50662 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50661 - "GET /uploads/afdeaeabdfda4c55a464c4fe09e05c36.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:50662 - "GET /uploads/a21c9f5acbe94086b186b1b5cecbb5d5.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53355 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53364 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53371 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53485 - "PUT /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53828 - "POST /api/v1/upload/image HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53864 - "PUT /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54201 - "GET /post.html?slug=agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54201 - "GET /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54202 - "GET /uploads/7be31b21a2dc4c0988103f017d4f662b.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54207 - "GET /uploads/2b69544139564e4ba7babd0f5c5f6a10.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54205 - "GET /uploads/89ca17f32b194102ab7948558fc62966.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54208 - "GET /uploads/03edf08271ed4fbc943c18fbf9bd30c7.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54201 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52117 - "GET /admin/ HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58785 - "GET /index.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58785 - "GET /assets/css/fonts.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58787 - "GET /assets/js/api.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58787 - "GET /assets/css/tailwind.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58787 - "GET /assets/js/lucide.min.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58785 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58789 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /assets/fonts/inter-regular.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58787 - "GET /api/v1/posts/latest?limit=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58787 - "GET /assets/fonts/jetbrains-mono-regular.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58791 - "GET /assets/fonts/jetbrains-mono-bold.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /assets/fonts/jetbrains-mono-medium.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /uploads/f1f5e1b85dfe421da8b77e92a7d744f9.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /uploads/7be31b21a2dc4c0988103f017d4f662b.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /blog.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58787 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58789 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /tags.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=AI+Agent HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=LLM HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=Tool+Design HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=Prompt+Engineering HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/posts?page=1&page_size=10&published_only=true&tag=Agent HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /about.html HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58791 - "GET /assets/js/marked.min.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /assets/images/avatar.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58789 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58787 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58789 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /post.html?slug=agent-tool-design-guide HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58791 - "GET /assets/js/prism-bash.min.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /assets/css/prism-tomorrow.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58787 - "GET /assets/js/prism-python.min.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58791 - "GET /assets/js/prism.min.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /assets/js/prism-json.min.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58791 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58789 - "GET /api/v1/posts/agent-tool-design-guide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58789 - "GET /api/v1/posts?page=1&page_size=100&published_only=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58791 - "GET /assets/fonts/inter-semibold.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /assets/fonts/inter-bold.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58789 - "GET /uploads/03edf08271ed4fbc943c18fbf9bd30c7.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58791 - "GET /uploads/2b69544139564e4ba7babd0f5c5f6a10.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58787 - "GET /uploads/89ca17f32b194102ab7948558fc62966.png HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:59032 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59026 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59024 - "GET /api/v1/posts/latest?limit=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53771 - "GET /admin/ HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63444 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63444 - "GET /assets/css/fonts.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63445 - "GET /assets/css/tailwind.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63444 - "GET /assets/js/api.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63444 - "GET /assets/js/lucide.min.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63449 - "GET /assets/fonts/inter-regular.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63447 - "GET /api/v1/settings/about HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63445 - "GET /api/v1/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63444 - "GET /api/v1/posts/latest?limit=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63451 - "GET /assets/fonts/jetbrains-mono-medium.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63449 - "GET /assets/fonts/jetbrains-mono-bold.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63449 - "GET /assets/fonts/jetbrains-mono-regular.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63449 - "GET /uploads/f1f5e1b85dfe421da8b77e92a7d744f9.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63451 - "GET /uploads/7be31b21a2dc4c0988103f017d4f662b.png HTTP/1.1" 304 Not Modified

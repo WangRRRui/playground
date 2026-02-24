@@ -92,6 +92,41 @@ const BlogAPI = (function() {
          */
         async searchPosts(query, page = 1) {
             return this.getPosts({ search: query, page });
+        },
+
+        /**
+         * Get about settings (social links etc.)
+         */
+        async getAbout() {
+            return request('/settings/about');
+        },
+
+        /**
+         * Load footer social links from about settings.
+         * Expects footer links to have id: footer-github, footer-twitter, footer-email
+         */
+        async loadFooterSocials() {
+            try {
+                const about = await this.getAbout();
+                const mapping = {
+                    'footer-github': about.social_github,
+                    'footer-twitter': about.social_twitter,
+                    'footer-email': about.social_email ? `mailto:${about.social_email}` : null,
+                };
+                for (const [id, url] of Object.entries(mapping)) {
+                    const el = document.getElementById(id);
+                    if (!el) continue;
+                    if (url) {
+                        el.href = url;
+                        el.target = '_blank';
+                        el.rel = 'noopener noreferrer';
+                    } else {
+                        el.style.display = 'none';
+                    }
+                }
+            } catch (e) {
+                // silently ignore - footer links stay as-is
+            }
         }
     };
 })();

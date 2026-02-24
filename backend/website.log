@@ -1,0 +1,82 @@
+::1 - - [11/Feb/2026 17:49:31] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:31] "GET /api/v1/tags HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:31] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:31] "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:35] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:35] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:35] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:35] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:43] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:43] "GET /index.html HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:43] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:43] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:44] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:44] "GET /index.html HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:44] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:44] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:46] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:46] "GET /index.html HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:46] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:46] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:47] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:47] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:47] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:47] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:47] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:47] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:49] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:49] "GET /index.html HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:49] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:49] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:51] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:51] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:51] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:51] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:51] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:51] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:51] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:51] "GET /index.html HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:51] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:51] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:53] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:53] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:53] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:53] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:53] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:53] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:54] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:54] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:54] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:54] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:54] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:54] "GET /api/v1/tags HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:55] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:55] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:55] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:55] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:55] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:55] "GET /api/v1/settings/about HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:57] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:57] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:57] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:57] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:49:57] code 404, message File not found
+::1 - - [11/Feb/2026 17:49:57] "GET /api/v1/tags HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:29] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:29] "GET /index.html HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:29] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:29] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:31] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:31] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:31] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:31] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:31] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:31] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:32] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:32] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:32] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:32] "GET /assets/js/lucide.min.js.map HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:32] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:32] "GET /api/v1/tags HTTP/1.1" 404 -
+::1 - - [11/Feb/2026 17:51:32] code 404, message File not found
+::1 - - [11/Feb/2026 17:51:32] "GET /api/v1/posts?page=1&page_size=9&published_only=true HTTP/1.1" 404 -

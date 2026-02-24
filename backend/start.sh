@@ -13,10 +13,9 @@ if ! command -v uv &> /dev/null; then
 fi
 
 # 杀掉占用 8000 端口的进程
-PORT=8000
-PID=$(lsof -ti:$PORT 2>/dev/null)
+PID=$(lsof -ti:8000 2>/dev/null)
 if [ -n "$PID" ]; then
-    echo "Killing existing process on port $PORT (PID: $PID)..."
+    echo "Killing existing process on port 8000 (PID: $PID)..."
     kill -9 $PID 2>/dev/null
     sleep 1
 fi
@@ -25,11 +24,11 @@ fi
 echo "Syncing dependencies..."
 uv sync
 
-# 启动服务（后台运行）
+# 启动服务（后台运行，同时托管前端和后端）
 echo "Starting server at http://localhost:8000"
 echo "API docs: http://localhost:8000/docs"
 echo "Admin: http://localhost:8000/admin/login.html"
 echo ""
 nohup uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 > server.log 2>&1 &
 echo "Server started in background. PID: $!"
-echo "Logs: $(dirname "$0")/server.log"
+echo "Logs: $(pwd)/server.log"

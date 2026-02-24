@@ -278,17 +278,17 @@
                         <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
                         <span class="font-mono font-bold text-lg text-white">Rui's<span class="text-cyber-green">Playground</span></span>
                     </div>
-                    <p class="text-gray-500 text-sm font-mono">© 2024 Autonomous Systems. All rights reserved.</p>
+                    <p class="text-gray-500 text-sm font-mono">© 2026 Autonomous Systems. All rights reserved.</p>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-cyber-green transition-colors">
+                    <a id="footer-github" href="#" class="text-gray-500 hover:text-cyber-green transition-colors">
                         <i data-lucide="github" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-cyber-blue transition-colors">
+                    <a id="footer-twitter" href="#" class="text-gray-500 hover:text-cyber-blue transition-colors">
                         <i data-lucide="twitter" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-cyber-purple transition-colors">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    <a id="footer-email" href="#" class="text-gray-500 hover:text-cyber-purple transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
                     </a>
                 </div>
             </div>
@@ -468,6 +468,7 @@
 
         // Initialize
         loadTagCloud();
+        BlogAPI.loadFooterSocials();
     </script>
 </body>
 </html>

@@ -96,7 +96,41 @@
             color: #e0e0e0;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
+
+        /* Page-level light mode */
+        body.page-light {
+            background-color: #eef2f7;
+            color: #1c1917;
+        }
+        body.page-light .border-gray-800 { border-color: #d0d7e2 !important; }
+        body.page-light .border-cyber-green\/20 { border-color: #c5cdd8 !important; }
+        body.page-light .text-gray-400 { color: #64748b !important; }
+        body.page-light .text-gray-500 { color: #94a3b8 !important; }
+        body.page-light .text-white { color: #1e293b !important; }
+        body.page-light .bg-cyber-dark { background-color: #e2e8f0 !important; }
+        body.page-light .bg-cyber-gray\/30 { background-color: rgba(0,0,0,0.03) !important; }
+        /* Keep nav logo "Rui's" visible in light mode */
+        body.page-light nav .text-white { color: #1e293b !important; }
+        body.page-light nav .text-cyber-green { color: #059669 !important; }
+        body.page-light nav .bg-cyber-black\/90 { background-color: rgba(30,41,59,0.95) !important; }
+        body.page-light nav .text-white { color: #f1f5f9 !important; }
+        body.page-light nav .text-gray-300 { color: #cbd5e1 !important; }
+        body.page-light nav .text-cyber-green { color: #34d399 !important; }
+        /* BACK_TO_LOGS link */
+        body.page-light .text-cyber-green { color: #2563eb !important; }
+        body.page-light nav .text-cyber-green { color: #34d399 !important; }
+        /* TOC */
+        body.page-light #toc-sidebar a { color: #64748b; }
+        body.page-light #toc-sidebar a:hover { color: #1e293b; }
+        body.page-light #toc-sidebar a.active { color: #2563eb; border-left-color: #2563eb; }
+        /* Controls */
+        body.page-light .mode-toggle { border-color: #c5cdd8; color: #64748b; }
+        body.page-light .mode-toggle:hover { border-color: #2563eb; color: #2563eb; }
+        body.page-light #progress-bar { background: #2563eb; box-shadow: none; }
+        body.page-light ::-webkit-scrollbar-thumb { background: #94a3b8; box-shadow: none; }
+        body.page-light ::-webkit-scrollbar-track { background: #eef2f7; }
 
         h1, h2, h3, h4, h5, h6, .font-mono {
             font-family: 'JetBrains Mono', monospace;
@@ -187,109 +221,126 @@
             100% { bottom: -100%; }
         }
 
-        /* Markdown Content Styles */
+        /* ========== Markdown Base ========== */
         .markdown-content {
-            color: #e0e0e0;
-            line-height: 1.8;
+            line-height: 1.9;
             font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
         }
-        .markdown-content h1, 
-        .markdown-content h2, 
-        .markdown-content h3, 
-        .markdown-content h4, 
-        .markdown-content h5, 
-        .markdown-content h6 {
-            font-family: 'JetBrains Mono', monospace;
-            color: #ffffff;
+        .markdown-content h1, .markdown-content h2, .markdown-content h3,
+        .markdown-content h4, .markdown-content h5, .markdown-content h6 {
             margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            scroll-margin-top: 5rem;
         }
-        .markdown-content h1 { font-size: 2.5rem; border-bottom: 1px solid #1a1a1a; padding-bottom: 0.5rem; }
-        .markdown-content h2 { font-size: 2rem; color: #00ff41; }
-        .markdown-content h3 { font-size: 1.5rem; color: #00f3ff; }
-        
-        .markdown-content p { margin-bottom: 1.5rem; }
-        
-        .markdown-content a {
-            color: #00f3ff;
-            text-decoration: none;
-            border-bottom: 1px dashed #00f3ff;
-            transition: all 0.2s;
-        }
-        .markdown-content a:hover {
-            background: rgba(0, 243, 255, 0.1);
-            color: #fff;
-        }
-        
-        .markdown-content ul, .markdown-content ol {
-            margin-bottom: 1.5rem;
-            padding-left: 2rem;
-        }
+        .markdown-content h1 { font-size: 2rem; padding-bottom: 0.5rem; }
+        .markdown-content h2 { font-size: 1.6rem; padding-bottom: 0.4rem; }
+        .markdown-content h3 { font-size: 1.3rem; }
+        .markdown-content p { margin-bottom: 1.25rem; }
+        .markdown-content a { text-decoration: underline; text-underline-offset: 2px; transition: color 0.2s; }
+        .markdown-content ul, .markdown-content ol { margin-bottom: 1.25rem; padding-left: 2rem; }
         .markdown-content ul { list-style-type: disc; }
         .markdown-content ol { list-style-type: decimal; }
-        .markdown-content li { margin-bottom: 0.5rem; }
-        .markdown-content li::marker { color: #00ff41; }
-        
-        .markdown-content blockquote {
-            border-left: 4px solid #bc13fe;
-            background: rgba(188, 19, 254, 0.05);
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            color: #d1d5db;
+        .markdown-content li { margin-bottom: 0.4rem; }
+        .markdown-content blockquote { padding: 0.75rem 1.25rem; margin-bottom: 1.25rem; }
+        .markdown-content code { font-family: 'JetBrains Mono', monospace; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; }
+        .markdown-content pre { border-radius: 0.5rem; margin-bottom: 1.5rem; padding: 1rem !important; overflow-x: auto; }
+        .markdown-content pre code { background: transparent; color: inherit; padding: 0; border-radius: 0; }
+        .markdown-content img { max-width: 100%; border-radius: 0.5rem; margin: 1.5rem 0; }
+        .markdown-content table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .markdown-content th, .markdown-content td { padding: 0.75rem; text-align: left; }
+        .markdown-content th { font-weight: 600; }
+        .markdown-content hr { margin: 2rem 0; }
+
+        /* ========== Light Mode (Default) ========== */
+        .md-light { color: #1c1917; }
+        .md-light h1, .md-light h2, .md-light h3, .md-light h4 { color: #0c0a09; }
+        .md-light h1, .md-light h2 { border-bottom: 1px solid #e7e5e4; }
+        .md-light a { color: #2563eb; }
+        .md-light a:hover { color: #1d4ed8; }
+        .md-light li::marker { color: #a8a29e; }
+        .md-light blockquote { border-left: 3px solid #d6d3d1; background: #f5f5f4; color: #57534e; }
+        .md-light code { background: #e7e5e4; color: #c2410c; }
+        .md-light pre { background: #f1f5f9 !important; border: 1px solid #cbd5e1; }
+        .md-light pre code { color: #334155; background: transparent; }
+        /* Light mode syntax highlighting */
+        .md-light .token.comment, .md-light .token.prolog, .md-light .token.doctype, .md-light .token.cdata { color: #6b7280; font-style: italic; }
+        .md-light .token.keyword, .md-light .token.tag, .md-light .token.boolean, .md-light .token.constant, .md-light .token.builtin { color: #1e40af; font-weight: 600; }
+        .md-light .token.string, .md-light .token.attr-value, .md-light .token.char { color: #b91c1c; }
+        .md-light .token.function, .md-light .token.class-name { color: #1e3a5f; }
+        .md-light .token.number { color: #b45309; }
+        .md-light .token.operator, .md-light .token.punctuation { color: #475569; }
+        .md-light .token.property, .md-light .token.attr-name { color: #0e7490; }
+        .md-light .token.variable, .md-light .token.parameter { color: #334155; }
+        .md-light .token.decorator, .md-light .token.atrule { color: #7c3aed; }
+        .md-light img { border: 1px solid #e7e5e4; }
+        .md-light th, .md-light td { border: 1px solid #e7e5e4; }
+        .md-light th { background: #f5f5f4; color: #1c1917; }
+        .md-light tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+        .md-light strong { color: #0c0a09; }
+        .md-light hr { border-color: #e7e5e4; }
+        .md-light pre::-webkit-scrollbar-thumb { background: #94a3b8; box-shadow: none; }
+        .md-light pre::-webkit-scrollbar-track { background: #f1f5f9; }
+
+        /* ========== Dark Mode ========== */
+        .md-dark { color: #d4d4d8; }
+        .md-dark h1, .md-dark h2, .md-dark h3, .md-dark h4 { color: #f4f4f5; }
+        .md-dark h1, .md-dark h2 { border-bottom: 1px solid #27272a; }
+        .md-dark a { color: #60a5fa; }
+        .md-dark a:hover { color: #93bbfc; }
+        .md-dark li::marker { color: #71717a; }
+        .md-dark blockquote { border-left: 3px solid #52525b; background: rgba(255,255,255,0.03); color: #a1a1aa; }
+        .md-dark code { background: #27272a; color: #e4e4e7; }
+        .md-dark pre { background: #18181b !important; border: 1px solid #27272a; }
+        .md-dark img { border: 1px solid #27272a; }
+        .md-dark th, .md-dark td { border: 1px solid #27272a; }
+        .md-dark th { background: #1f1f23; color: #e4e4e7; }
+        .md-dark tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        .md-dark strong { color: #f4f4f5; }
+        .md-dark hr { border-color: #27272a; }
+        .md-dark pre::-webkit-scrollbar-thumb { background: #52525b; box-shadow: none; }
+        .md-dark pre::-webkit-scrollbar-track { background: #18181b; }
+
+        /* ========== TOC Sidebar ========== */
+        #toc-sidebar {
+            position: sticky;
+            top: 5rem;
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+            scrollbar-width: thin;
         }
-        
-        .markdown-content code {
-            font-family: 'JetBrains Mono', monospace;
-            background: #1a1a1a;
-            color: #00ff41;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.25rem;
-            font-size: 0.9em;
+        #toc-sidebar::-webkit-scrollbar { width: 2px; }
+        #toc-sidebar::-webkit-scrollbar-thumb { background: #333; }
+        #toc-sidebar a {
+            display: block;
+            padding: 0.25rem 0;
+            color: #71717a;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            text-decoration: none;
+            transition: color 0.15s;
+            border-left: 2px solid transparent;
+            padding-left: 0.75rem;
         }
-        
-        .markdown-content pre {
-            background: #111111 !important;
+        #toc-sidebar a:hover { color: #d4d4d8; }
+        #toc-sidebar a.active { color: #00ff41; border-left-color: #00ff41; }
+        #toc-sidebar .toc-h3 { padding-left: 1.5rem; font-size: 0.75rem; }
+
+        /* Mode toggle button */
+        .mode-toggle {
+            cursor: pointer;
+            padding: 0.4rem 0.8rem;
             border: 1px solid #333;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem !important;
-            overflow-x: auto;
-        }
-        .markdown-content pre code {
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s;
             background: transparent;
-            color: inherit;
-            padding: 0;
-            border-radius: 0;
+            color: #a1a1aa;
         }
-        
-        .markdown-content img {
-            max-width: 100%;
-            border-radius: 0.5rem;
-            border: 1px solid #333;
-            margin: 2rem 0;
-        }
-        
-        .markdown-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-        .markdown-content th, .markdown-content td {
-            border: 1px solid #333;
-            padding: 0.75rem;
-            text-align: left;
-        }
-        .markdown-content th {
-            background: #1a1a1a;
-            color: #00ff41;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .markdown-content tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.02);
-        }
+        .mode-toggle:hover { border-color: #00ff41; color: #00ff41; }
 
         /* Progress Bar */
         #progress-bar {
@@ -305,7 +356,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col relative">
+<body class="min-h-screen flex flex-col relative page-light">
 
     <!-- Reading Progress Bar -->
     <div id="progress-bar"></div>
@@ -347,16 +398,17 @@
 
     <!-- Main Content -->
     <main class="flex-grow pt-24 pb-16">
-        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Article Header -->
-            <header id="post-header" class="mb-12 border-b border-gray-800 pb-8">
-                <div class="flex items-center gap-2 mb-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Article Header (full width) -->
+            <header id="post-header" class="mb-12 border-b border-gray-800 pb-8 max-w-4xl mx-auto lg:mx-0 lg:ml-[220px]">
+                <div class="flex items-center justify-between mb-4">
                     <a href="blog.html" class="text-cyber-green hover:underline font-mono text-sm">&lt; BACK_TO_LOGS</a>
+                    <button id="mode-toggle" class="mode-toggle" onclick="toggleMode()">
+                        <i data-lucide="sun" class="w-3.5 h-3.5 inline-block align-middle"></i> Light
+                    </button>
                 </div>
 
                 <div id="post-tags" class="flex flex-wrap gap-2 mb-6">
-                    <!-- Tags will be loaded dynamically -->
                 </div>
 
                 <h1 id="post-title" class="text-3xl md:text-5xl font-bold text-white font-mono mb-6 leading-tight glitch-text" data-text="Loading...">
@@ -382,18 +434,32 @@
             </header>
 
             <!-- Featured Image -->
-            <div id="post-cover" class="mb-12 relative rounded-sm overflow-hidden border border-gray-800 group hidden">
-                <img id="post-cover-img" src="" alt="" class="w-full h-auto object-cover">
+            <div id="post-cover" class="mb-12 relative aspect-video rounded-sm overflow-hidden border border-gray-800 group hidden max-w-4xl mx-auto lg:mx-0 lg:ml-[220px]">
+                <img id="post-cover-img" src="" alt="" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
             </div>
 
-            <!-- Markdown Content Container -->
-            <div id="markdown-content" class="markdown-content">
-                <!-- Content will be injected here by JS -->
+            <!-- Content area with TOC sidebar -->
+            <div class="flex gap-8">
+                <!-- TOC Sidebar (hidden on mobile) -->
+                <aside class="hidden lg:block w-[200px] flex-shrink-0">
+                    <nav id="toc-sidebar" class="font-mono">
+                        <div class="text-xs text-gray-500 mb-3 uppercase tracking-wider">Contents</div>
+                        <div id="toc-links"></div>
+                    </nav>
+                </aside>
+
+                <!-- Article body -->
+                <article class="flex-1 min-w-0">
+                    <!-- Markdown Content Container -->
+                    <div id="markdown-content" class="markdown-content md-light">
+                        <!-- Content will be injected here by JS -->
+                    </div>
+                </article>
             </div>
 
-            <!-- Article Footer -->
-            <footer class="mt-16 pt-8 border-t border-gray-800">
+            <!-- Article Footer (full width, aligned with content) -->
+            <footer class="mt-16 pt-8 border-t border-gray-800 lg:ml-[220px]">
                 <div class="flex justify-between items-center mb-8">
                     <div class="font-mono text-gray-400 text-sm">
                         SHARE_TRANSMISSION:
@@ -405,20 +471,12 @@
                     </div>
                 </div>
 
-                <!-- Navigation -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="#" class="group p-4 border border-gray-800 hover:border-cyber-green bg-cyber-gray/30 transition-all rounded-sm">
-                        <div class="text-xs text-gray-500 font-mono mb-1 group-hover:text-cyber-green">&lt; PREVIOUS_LOG</div>
-                        <div class="text-white font-bold truncate">Introduction to Large Language Models</div>
-                    </a>
-                    <a href="#" class="group p-4 border border-gray-800 hover:border-cyber-blue bg-cyber-gray/30 transition-all rounded-sm text-right">
-                        <div class="text-xs text-gray-500 font-mono mb-1 group-hover:text-cyber-blue">NEXT_LOG &gt;</div>
-                        <div class="text-white font-bold truncate">Memory Systems in LLMs: Vector DBs vs. Graph DBs</div>
-                    </a>
+                <!-- Navigation (dynamically loaded) -->
+                <div id="post-nav" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 </div>
             </footer>
 
-        </article>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -430,17 +488,17 @@
                         <i data-lucide="terminal" class="w-5 h-5 text-cyber-green"></i>
                         <span class="font-mono font-bold text-lg text-white">Rui's<span class="text-cyber-green">Playground</span></span>
                     </div>
-                    <p class="text-gray-500 text-sm font-mono">© 2024 Autonomous Systems. All rights reserved.</p>
+                    <p class="text-gray-500 text-sm font-mono">© 2026 Autonomous Systems. All rights reserved.</p>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-cyber-green transition-colors">
+                    <a id="footer-github" href="#" class="text-gray-500 hover:text-cyber-green transition-colors">
                         <i data-lucide="github" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-cyber-blue transition-colors">
+                    <a id="footer-twitter" href="#" class="text-gray-500 hover:text-cyber-blue transition-colors">
                         <i data-lucide="twitter" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-cyber-purple transition-colors">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    <a id="footer-email" href="#" class="text-gray-500 hover:text-cyber-purple transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
                     </a>
                 </div>
             </div>
@@ -501,6 +559,12 @@
                     Prism.highlightAll();
                 }
 
+                // Generate TOC from headings
+                generateTOC();
+
+                // Load prev/next navigation
+                loadPostNav(slug, post.published_at);
+
                 lucide.createIcons();
             } catch (error) {
                 console.error('Failed to load post:', error);
@@ -510,8 +574,108 @@
             }
         }
 
+        async function loadPostNav(currentSlug, currentDate) {
+            try {
+                const data = await BlogAPI.getPosts({ page: 1, page_size: 100 });
+                const posts = data.items || [];
+                const idx = posts.findIndex(p => p.slug === currentSlug);
+                if (idx === -1) return;
+
+                const nav = document.getElementById('post-nav');
+                // posts are sorted newest first, so "prev" = older = idx+1, "next" = newer = idx-1
+                const prev = idx < posts.length - 1 ? posts[idx + 1] : null;
+                const next = idx > 0 ? posts[idx - 1] : null;
+
+                let html = '';
+                if (prev) {
+                    html += `<a href="post.html?slug=${prev.slug}" class="group p-4 border border-gray-800 hover:border-cyber-green bg-cyber-gray/30 transition-all rounded-sm">
+                        <div class="text-xs text-gray-500 font-mono mb-1 group-hover:text-cyber-green">&lt; PREVIOUS_LOG</div>
+                        <div class="text-white font-bold truncate">${prev.title}</div>
+                    </a>`;
+                } else {
+                    html += '<div></div>';
+                }
+                if (next) {
+                    html += `<a href="post.html?slug=${next.slug}" class="group p-4 border border-gray-800 hover:border-cyber-blue bg-cyber-gray/30 transition-all rounded-sm text-right">
+                        <div class="text-xs text-gray-500 font-mono mb-1 group-hover:text-cyber-blue">NEXT_LOG &gt;</div>
+                        <div class="text-white font-bold truncate">${next.title}</div>
+                    </a>`;
+                }
+                nav.innerHTML = html;
+            } catch (e) {
+                // silently ignore nav loading errors
+            }
+        }
+
+        // Mode toggle (whole page light/dark)
+        let isDarkMode = false;
+        function toggleMode() {
+            const md = document.getElementById('markdown-content');
+            const btn = document.getElementById('mode-toggle');
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                document.body.classList.remove('page-light');
+                md.classList.remove('md-light');
+                md.classList.add('md-dark');
+                btn.innerHTML = '<i data-lucide="moon" class="w-3.5 h-3.5 inline-block align-middle"></i> Dark';
+            } else {
+                document.body.classList.add('page-light');
+                md.classList.remove('md-dark');
+                md.classList.add('md-light');
+                btn.innerHTML = '<i data-lucide="sun" class="w-3.5 h-3.5 inline-block align-middle"></i> Light';
+            }
+            lucide.createIcons();
+        }
+
+        // Generate TOC from markdown headings
+        function generateTOC() {
+            const content = document.getElementById('markdown-content');
+            const tocLinks = document.getElementById('toc-links');
+            const headings = content.querySelectorAll('h1, h2, h3');
+            if (headings.length === 0) return;
+
+            let html = '';
+            let counters = [0, 0, 0]; // h1, h2, h3
+            headings.forEach((h, i) => {
+                const id = 'heading-' + i;
+                h.id = id;
+                const level = h.tagName.toLowerCase();
+                let prefix = '';
+                if (level === 'h1') {
+                    counters[0]++;
+                    counters[1] = 0;
+                    counters[2] = 0;
+                    prefix = counters[0] + '. ';
+                } else if (level === 'h2') {
+                    counters[1]++;
+                    counters[2] = 0;
+                    prefix = counters[0] + '.' + counters[1] + ' ';
+                } else {
+                    counters[2]++;
+                    prefix = counters[0] + '.' + counters[1] + '.' + counters[2] + ' ';
+                }
+                const cls = level === 'h3' ? 'toc-h3' : '';
+                html += `<a href="#${id}" class="${cls}" data-target="${id}">${prefix}${h.textContent}</a>`;
+            });
+            tocLinks.innerHTML = html;
+
+            // Scroll spy: highlight active TOC link
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        tocLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                        const link = tocLinks.querySelector(`a[data-target="${entry.target.id}"]`);
+                        if (link) link.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+
+            headings.forEach(h => observer.observe(h));
+        }
+
         // Initialize
         loadPost();
+        BlogAPI.loadFooterSocials();
 
         // Matrix Background Effect
         const canvas = document.getElementById('matrix-bg');
