@@ -157,6 +157,49 @@ footer{margin-top:60px;border-top:1px solid var(--line);padding-top:16px;font-si
 footer li{margin:.15rem 0}
 .credits{columns:2;column-gap:20px}
 @media (max-width:560px){.credits{columns:1} h1{font-size:2rem} .dayhead .dn{font-size:1.7rem}}
+
+/* car-drop diagrams (cd-) */
+.cardrop{--cd-a:#2458a6;--cd-b:#c2571a;--cd-c:#9a3b6e;--cd-hill:color-mix(in srgb,var(--hike) 12%,var(--surface));--cd-hill2:color-mix(in srgb,var(--hike) 22%,var(--surface));display:grid;gap:12px;margin-top:14px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cardrop{--cd-a:#79a6ec;--cd-b:#ee9255;--cd-c:#e08ab8}}
+:root[data-theme="dark"] .cardrop{--cd-a:#79a6ec;--cd-b:#ee9255;--cd-c:#e08ab8}
+.cardrop ul.cd-cars{display:flex;flex-wrap:wrap;gap:6px 10px;margin:0;padding:0;list-style:none;font-size:.86rem}
+.cardrop ul.cd-cars li{display:inline-flex;align-items:center;gap:8px;margin:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 10px}
+.cardrop .cd-chip{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:4px;color:var(--surface);font-size:.75rem;font-weight:700;padding:0 5px}
+.cardrop .cd-chip.cd-a{background:var(--cd-a)} .cardrop .cd-chip.cd-b{background:var(--cd-b)} .cardrop .cd-chip.cd-c{background:var(--cd-c)}
+.cardrop .cd-legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.82rem;color:var(--muted)}
+.cardrop .cd-legend span{display:inline-flex;align-items:center;gap:8px}
+.cardrop .cd-legend svg{width:34px;height:12px;flex:none}
+.cardrop .cd-fig{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;box-shadow:var(--shadow);display:grid;gap:12px}
+.cardrop .cd-h{margin:0;font-size:1.02rem}
+.cardrop .cd-map-scroll{overflow-x:auto}
+.cardrop .cd-map-scroll svg{display:block;width:100%;min-width:720px;height:auto}
+.cardrop ol.cd-steps{list-style:none;margin:0;padding:0;display:grid;gap:8px 18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));font-size:.88rem;line-height:1.55}
+.cardrop ol.cd-steps li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;margin:0}
+.cardrop .cd-n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--surface);font-size:.72rem;font-weight:700;display:grid;place-items:center;margin-top:1px;font-family:var(--mono)}
+.cardrop .cd-fig figcaption{font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.cardrop .cd-fig figcaption p{margin:0}
+.cardrop .cd-hill{fill:var(--cd-hill)} .cardrop .cd-hill2{fill:var(--cd-hill2)}
+.cardrop .cd-border{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:10 4 2 4}
+.cardrop .cd-hwy{fill:none;stroke:var(--accent);stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+.cardrop .cd-road{fill:none;stroke:var(--stay);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.cardrop .cd-hike{fill:none;stroke:var(--hike);stroke-width:2.5;stroke-dasharray:6 5;stroke-linecap:round}
+.cardrop .cd-hike.cd-strong{stroke-width:4}
+.cardrop .cd-flow{fill:none;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.cardrop .cd-flow.cd-a{stroke:var(--cd-a)} .cardrop .cd-flow.cd-b{stroke:var(--cd-b)} .cardrop .cd-flow.cd-c{stroke:var(--cd-c)}
+.cardrop .cd-flow.cd-all{stroke:var(--muted);stroke-dasharray:2 5}
+.cardrop .cd-dim{opacity:.35}
+.cardrop .cd-node{fill:var(--surface);stroke:var(--ink);stroke-width:2}
+.cardrop .cd-node.cd-key{fill:var(--ink)}
+.cardrop svg text{font-family:var(--sans);fill:var(--ink);font-size:13px;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+.cardrop svg text.cd-sm{font-size:11.5px;fill:var(--muted)}
+.cardrop svg text.cd-b{font-weight:700}
+.cardrop svg text.cd-title{font-size:16px;font-weight:700}
+.cardrop svg text.cd-prov{font-size:12px;letter-spacing:.25em;fill:var(--muted)}
+.cardrop svg text.cd-ta{fill:var(--cd-a);font-weight:700} .cardrop svg text.cd-tb{fill:var(--cd-b);font-weight:700} .cardrop svg text.cd-tc{fill:var(--cd-c);font-weight:700} .cardrop svg text.cd-th{fill:var(--hike);font-weight:700}
+.cardrop .cd-badge circle{fill:var(--ink);stroke:var(--surface);stroke-width:2}
+.cardrop .cd-badge text,.cardrop .cd-carbox text{fill:var(--surface);stroke:none;font-size:12px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.cardrop .cd-carbox.cd-a rect{fill:var(--cd-a)} .cardrop .cd-carbox.cd-b rect{fill:var(--cd-b)} .cardrop .cd-carbox.cd-c rect{fill:var(--cd-c)}
+.cardrop .cd-ah-a{fill:var(--cd-a)} .cardrop .cd-ah-b{fill:var(--cd-b)} .cardrop .cd-ah-c{fill:var(--cd-c)} .cardrop .cd-ah-all{fill:var(--muted)} .cardrop .cd-ah-hike{fill:var(--hike)}
 </style>
 </head>
 <body>
@@ -228,7 +271,7 @@ footer li{margin:.15rem 0}
     <li><a href="#d5"><b>D5</b>武昌</a></li>
     <li><a href="#d6"><b>D6</b>汉口→回家</a></li>
     <li><a href="#d7"><b>D7</b>休息</a></li>
-    <li><a href="#shuttle">双车接驳</a></li>
+    <li><a href="#shuttle">三车接驳</a></li>
     <li><a href="#jams">堵点</a></li>
     <li><a href="#stays">住宿</a></li>
     <li><a href="#book">订票日历</a></li>
@@ -481,24 +524,219 @@ footer li{margin:.15rem 0}
 
 <!-- ============ SHUTTLE ============ -->
 <section class="day" id="shuttle">
-  <div class="dayhead"><div class="dn">接驳</div><div class="date">D1–D2 · 两端相距 89 km 车程</div><h2>双车接驳怎么走</h2></div>
-  <figure class="routemap shuttle" style="margin-top:14px">
-    <svg viewBox="0 0 700 250" role="img" aria-label="徽杭古道两端与车道示意">
-      <path class="trail" d="M120 120 C170 110, 210 95, 250 80 C300 60, 360 50, 420 62 C470 72, 520 95, 580 120"/>
-      <path class="road thin" d="M120 120 C110 160, 150 200, 250 210 C330 218, 420 220, 500 210 C560 202, 585 165, 580 120"/>
-      <path class="road thin" d="M120 120 C100 100, 95 80, 110 60"/>
-      <circle class="node" cx="120" cy="120" r="7"/><text class="lbl" x="60" y="140">鱼川 售票处</text><text class="sub" x="52" y="152">D2 08:00 出发 · A 车</text>
-      <circle class="node" cx="110" cy="60" r="5"/><text class="lbl" x="40" y="52">绩溪县城</text><text class="sub" x="40" y="64">宿 D1 · 20 km</text>
-      <circle class="node" cx="200" cy="99" r="4"/><text class="sub" x="150" y="92">江南第一关 424m</text>
-      <circle class="node" cx="290" cy="64" r="4"/><text class="sub" x="262" y="52">黄茅培</text>
-      <circle class="node" cx="420" cy="62" r="6"/><text class="lbl" x="392" y="48">蓝天凹 1050 m</text><text class="hike-t" x="380" y="36">最晚 14:30 离开</text>
-      <circle class="node" cx="520" cy="95" r="4"/><text class="sub" x="528" y="90">永来村</text>
-      <circle class="node" cx="580" cy="120" r="7"/><text class="lbl" x="592" y="124">浙基田</text><text class="sub" x="592" y="137">留 B、C · 14:30 到</text>
-      <text class="sub" x="230" y="238">车道：颊浙线 → 杭徽 昱岭关隧道 → 绩溪出口 → 013 县道 · 89 km / 1 h 36</text>
-      <text class="sub" x="300" y="112">徒步 20 km · 6–7 h →</text>
-    </svg>
-    <figcaption>虚线绿是徒步，灰线是开车。两端直线只有 12 km，开车要绕昱岭关 89 km。</figcaption>
+  <div class="dayhead"><div class="dn">接驳</div><div class="date">D1–D2 · 两端相距 89 km 车程</div><h2>三车接驳怎么走</h2></div>
+  <div class="cardrop">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+    <marker id="cd-ah-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path class="cd-ah-a" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="cd-ah-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path class="cd-ah-b" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="cd-ah-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path class="cd-ah-c" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="cd-ah-all" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path class="cd-ah-all" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="cd-ah-hike" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path class="cd-ah-hike" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs></svg>
+    <ul class="cd-cars" aria-label="三辆车">
+      <li><span class="cd-chip cd-a">A</span>蔚来 ES8 · 6 座 · 去起点</li>
+      <li><span class="cd-chip cd-b">B</span>理想 · 5 座 · 留终点，10/2 下山回杭州</li>
+      <li><span class="cd-chip cd-c">C</span>方程豹 · 5 座 · 留终点，下山载 4 人取 A 车</li>
+    </ul>
+    <div class="cd-legend" aria-label="图例">
+      <span><svg viewBox="0 0 34 12"><line x1="2" y1="6" x2="32" y2="6" class="cd-hwy"/></svg>杭徽高速 G56</span>
+      <span><svg viewBox="0 0 34 12"><line x1="2" y1="6" x2="32" y2="6" class="cd-road"/></svg>县道 / 村道</span>
+      <span><svg viewBox="0 0 34 12"><line x1="2" y1="6" x2="32" y2="6" class="cd-hike cd-strong"/></svg>徒步</span>
+      <span><svg viewBox="0 0 34 12"><line x1="2" y1="6" x2="26" y2="6" class="cd-flow cd-all" marker-end="url(#cd-ah-all)"/></svg>三车同行</span>
+      <span><svg viewBox="0 0 34 12"><line x1="0" y1="6" x2="34" y2="6" class="cd-border"/></svg>浙皖省界</span>
+    </div>
+    <figure class="cd-fig">
+    <h3 class="cd-h">10/1 · 三车到浙基田，留下 B、C，6 人坐 A 车去龙川</h3>
+    <div class="cd-map-scroll">
+      <svg viewBox="0 0 960 430" role="img" aria-label="10月1日：三车从杭州经杭徽高速到颊口，拐进颊浙线到浙基田，B、C两车停下，6人坐A车原路出颊口，过昱岭关隧道到龙川，傍晚到绩溪县城看博物馆并住下">
+        <ellipse class="cd-hill" cx="420" cy="218" rx="155" ry="88"/>
+        <ellipse class="cd-hill2" cx="414" cy="224" rx="72" ry="38"/>
+        <polyline class="cd-border" points="500,18 480,112 445,170 410,226 385,300 365,412"/>
+        <text class="cd-prov" x="330" y="44" text-anchor="middle">安徽 · 绩溪</text>
+        <text class="cd-prov" x="610" y="44" text-anchor="middle">浙江 · 临安</text>
+
+        <polyline class="cd-hwy" points="920,150 780,150 620,140 480,112 360,118 250,150"/>
+        <polyline class="cd-road" points="620,140 600,210 520,262"/>
+        <polyline class="cd-road" points="250,150 230,255 170,318 90,292"/>
+        <polyline class="cd-road" points="230,255 300,262"/>
+        <polyline class="cd-hike cd-dim" points="300,262 338,250 372,240 410,226 470,252 520,262"/>
+
+        <polyline class="cd-flow cd-all" points="916,144 624,134 604,204 528,254" marker-end="url(#cd-ah-all)"/>
+        <polyline class="cd-flow cd-a" points="522,268 606,214 628,146 482,118 362,124 257,155 237,256 172,324 98,299" marker-mid="url(#cd-ah-a)" marker-end="url(#cd-ah-a)"/>
+
+        <circle class="cd-node" cx="920" cy="150" r="6"/>
+        <circle class="cd-node" cx="780" cy="150" r="5"/>
+        <circle class="cd-node" cx="620" cy="140" r="5"/>
+        <circle class="cd-node" cx="480" cy="112" r="5"/>
+        <circle class="cd-node" cx="250" cy="150" r="5"/>
+        <circle class="cd-node cd-key" cx="170" cy="318" r="7"/>
+        <circle class="cd-node cd-key" cx="90" cy="292" r="7"/>
+        <circle class="cd-node" cx="300" cy="262" r="6"/>
+        <circle class="cd-node cd-key" cx="520" cy="262" r="7"/>
+
+        <text x="920" y="132" text-anchor="end" class="cd-b">杭州</text>
+        <text x="940" y="176" text-anchor="end" class="cd-sm">7:00 三车出发 · 约 125 km 到浙基田</text>
+        <text x="780" y="132" text-anchor="middle" class="cd-sm">昌化</text>
+        <text x="632" y="166">颊口 · 清凉峰出口</text>
+        <text x="486" y="136" text-anchor="middle" class="cd-sm">昱岭关隧道</text>
+        <text x="355" y="148" text-anchor="middle" class="cd-ta">A 车载 6 人 · 90 km 到龙川</text>
+        <text x="250" y="134" text-anchor="middle" class="cd-sm">绩溪出口</text>
+        <text x="614" y="236" class="cd-sm">颊浙线 · 进出各 10 km</text>
+        <text x="170" y="346" text-anchor="middle" class="cd-b">龙川景区</text>
+        <text x="90" y="274" text-anchor="middle" class="cd-b">绩溪县城 · 住 2 晚</text>
+        <text x="300" y="290" text-anchor="middle" class="cd-sm">鱼川 · 古道起点</text>
+        <text x="520" y="316" text-anchor="middle" class="cd-b">浙基田 · 古道终点</text>
+        <text x="410" y="206" text-anchor="middle" class="cd-sm">蓝天凹 1050 m</text>
+        <text x="372" y="404" class="cd-sm">省界</text>
+
+        <g class="cd-carbox cd-b"><rect x="534" y="252" width="26" height="20" rx="4"/><text x="547" y="262">B</text></g>
+        <g class="cd-carbox cd-c"><rect x="564" y="252" width="26" height="20" rx="4"/><text x="577" y="262">C</text></g>
+        <text x="596" y="266" class="cd-sm">停农家乐</text>
+
+        <g class="cd-badge"><circle cx="760" cy="126" r="10"/><text x="760" y="126">1</text></g>
+        <g class="cd-badge"><circle cx="590" cy="178" r="10"/><text x="590" y="178">2</text></g>
+        <g class="cd-badge"><circle cx="520" cy="236" r="10"/><text x="520" y="236">3</text></g>
+        <g class="cd-badge"><circle cx="420" cy="102" r="10"/><text x="420" y="102">4</text></g>
+        <g class="cd-badge"><circle cx="214" cy="292" r="10"/><text x="214" y="292">5</text></g>
+        <g class="cd-badge"><circle cx="128" cy="320" r="10"/><text x="128" y="320">6</text></g>
+      </svg>
+    </div>
+    <ol class="cd-steps">
+      <li><span class="cd-n">1</span><div><b>07:00</b> 三车各自从杭州出发，走杭徽高速，约 125 km。不堵 2 小时，按 4 小时留</div></li>
+      <li><span class="cd-n">2</span><div>清凉峰出口下，颊口拐进颊浙线，最后 <b>10 km</b> 是沿溪村道</div></li>
+      <li><span class="cd-n">3</span><div><b>11:00</b> 浙基田会合，B、C 停农家乐院子，在那家吃午饭。先到的等，A 车不先走</div></li>
+      <li><span class="cd-n">4</span><div><b>12:00</b> 6 人坐 A 车，原路出颊口，过昱岭关隧道进安徽</div></li>
+      <li><span class="cd-n">5</span><div><b>13:40</b> 龙川景区，逛 2 小时</div></li>
+      <li><span class="cd-n">6</span><div><b>16:00</b> 绩溪博物馆（16:30 前进馆），<b>17:10</b> 入住绩溪县城，连住 2 晚</div></li>
+    </ol>
+    <figcaption>
+      <p>示意图，不按比例。大件行李留在 B、C 车里，只带绩溪两晚要用的小包上 A 车。</p>
+    </figcaption>
   </figure>
+    <figure class="cd-fig">
+    <h3 class="cd-h">10/2 · 六人一起徒步，下山后三车各走各的</h3>
+    <div class="cd-map-scroll">
+      <svg viewBox="0 0 960 430" role="img" aria-label="10月2日：A车载6人从绩溪县城开到鱼川，六人徒步20公里经蓝天凹到浙基田；B车从浙基田经杭徽高速回杭州；C车载4人绕昱岭关89公里回鱼川取A车；A、C两车回绩溪县城">
+        <ellipse class="cd-hill" cx="420" cy="218" rx="155" ry="88"/>
+        <ellipse class="cd-hill2" cx="414" cy="224" rx="72" ry="38"/>
+        <polyline class="cd-border" points="500,18 480,112 445,170 410,226 385,300 365,412"/>
+        <text class="cd-prov" x="330" y="44" text-anchor="middle">安徽 · 绩溪</text>
+        <text class="cd-prov" x="610" y="44" text-anchor="middle">浙江 · 临安</text>
+
+        <polyline class="cd-hwy" points="920,150 780,150 620,140 480,112 360,118 250,150"/>
+        <polyline class="cd-road" points="620,140 600,210 520,262"/>
+        <polyline class="cd-road" points="250,150 230,255 170,318 90,292"/>
+        <polyline class="cd-road" points="230,255 300,262"/>
+
+        <polyline class="cd-flow cd-a" points="96,284 166,306 224,246 290,252" marker-end="url(#cd-ah-a)"/>
+        <polyline class="cd-hike cd-strong" points="300,262 338,250 372,240 410,226 470,252 512,260" marker-end="url(#cd-ah-hike)"/>
+        <polyline class="cd-flow cd-b" points="532,254 608,206 630,142 780,156 914,156" marker-mid="url(#cd-ah-b)" marker-end="url(#cd-ah-b)"/>
+        <polyline class="cd-flow cd-c" points="514,266 596,214 614,146 479,106 358,112 244,146 222,258 292,268" marker-mid="url(#cd-ah-c)" marker-end="url(#cd-ah-c)"/>
+        <polyline class="cd-flow cd-all" points="292,276 234,268 176,332 104,306" marker-end="url(#cd-ah-all)"/>
+
+        <circle class="cd-node" cx="920" cy="150" r="6"/>
+        <circle class="cd-node" cx="620" cy="140" r="5"/>
+        <circle class="cd-node" cx="480" cy="112" r="5"/>
+        <circle class="cd-node" cx="250" cy="150" r="5"/>
+        <circle class="cd-node" cx="170" cy="318" r="6"/>
+        <circle class="cd-node cd-key" cx="90" cy="292" r="7"/>
+        <circle class="cd-node cd-key" cx="300" cy="262" r="7"/>
+        <circle class="cd-node" cx="410" cy="226" r="5"/>
+        <circle class="cd-node cd-key" cx="520" cy="262" r="7"/>
+
+        <text x="920" y="132" text-anchor="end" class="cd-b">杭州</text>
+        <text x="780" y="186" text-anchor="middle" class="cd-tb">B 车回杭州 约 125 km · 2 h</text>
+        <text x="632" y="128" class="cd-sm">颊口</text>
+        <text x="486" y="136" text-anchor="middle" class="cd-sm">昱岭关隧道</text>
+        <text x="370" y="80" text-anchor="middle" class="cd-tc">C 车载 4 人回鱼川 89 km · 1 h 36</text>
+        <text x="250" y="134" text-anchor="middle" class="cd-sm">绩溪出口</text>
+        <text x="170" y="360" text-anchor="middle" class="cd-sm">龙川</text>
+        <text x="90" y="274" text-anchor="middle" class="cd-b">绩溪县城</text>
+        <text x="300" y="296" text-anchor="middle" class="cd-b">鱼川 · 起点</text>
+        <text x="520" y="316" text-anchor="middle" class="cd-b">浙基田 · 终点</text>
+        <text x="410" y="206" text-anchor="middle" class="cd-b">蓝天凹 1050 m</text>
+        <text x="470" y="238" text-anchor="middle" class="cd-sm">永来村</text>
+        <text x="430" y="352" text-anchor="middle" class="cd-th">六人一起正穿 20 km · 6–7 h</text>
+        <text x="120" y="400" class="cd-sm">A、C 两车回绩溪县城 20 km</text>
+        <text x="372" y="404" class="cd-sm">省界</text>
+
+        <g class="cd-carbox cd-b"><rect x="534" y="270" width="26" height="20" rx="4"/><text x="547" y="280">B</text></g>
+        <g class="cd-carbox cd-c"><rect x="564" y="270" width="26" height="20" rx="4"/><text x="577" y="280">C</text></g>
+        <g class="cd-carbox cd-a"><rect x="316" y="226" width="26" height="20" rx="4"/><text x="329" y="236">A</text></g>
+
+        <g class="cd-badge"><circle cx="130" cy="262" r="10"/><text x="130" y="262">1</text></g>
+        <g class="cd-badge"><circle cx="355" cy="222" r="10"/><text x="355" y="222">2</text></g>
+        <g class="cd-badge"><circle cx="410" cy="180" r="10"/><text x="410" y="180">3</text></g>
+        <g class="cd-badge"><circle cx="606" cy="280" r="10"/><text x="606" y="280">4</text></g>
+        <g class="cd-badge"><circle cx="700" cy="130" r="10"/><text x="700" y="130">5</text></g>
+        <g class="cd-badge"><circle cx="420" cy="98" r="10"/><text x="420" y="98">6</text></g>
+        <g class="cd-badge"><circle cx="150" cy="340" r="10"/><text x="150" y="340">7</text></g>
+      </svg>
+    </div>
+    <ol class="cd-steps">
+      <li><span class="cd-n">1</span><div><b>07:30</b> A 车载 6 人从绩溪县城开到鱼川，20 km / 30 min，停在起点</div></li>
+      <li><span class="cd-n">2</span><div><b>08:00</b> 六人从鱼川一起正穿，过江南第一关、黄茅培</div></li>
+      <li><span class="cd-n">3</span><div><b>12:30</b> 前后到蓝天凹吃干粮。<b>最晚 14:30</b> 离开，天黑前下山</div></li>
+      <li><span class="cd-n">4</span><div><b>14:30</b> 前后下到浙基田，B、C 就停在村里</div></li>
+      <li><span class="cd-n">5</span><div>B 车的人直接回杭州，约 <b>125 km / 2 h</b>，17:00 前后到家</div></li>
+      <li><span class="cd-n">6</span><div>C 车载 4 人绕昱岭关回鱼川取 A 车，<b>89 km / 1 h 36</b></div></li>
+      <li><span class="cd-n">7</span><div><b>16:20</b> A、C 两车回绩溪县城，20 km，<b>16:50</b> 进房</div></li>
+    </ol>
+    <figcaption>
+      <p>B 车的人不回绩溪，10/2 早上要退房；过夜小包放 A 车里，回杭州后再拿。</p>
+    </figcaption>
+  </figure>
+    <figure class="cd-fig">
+    <h3 class="cd-h">B 车停终点，还是停起点</h3>
+    <div class="cd-map-scroll">
+      <svg viewBox="0 0 960 250" role="img" aria-label="对比：B、C停终点时，B车从浙基田回杭州约125公里，C车载4人回鱼川；若B停起点，下山后只有C车在浙基田，要载6人但只有5座，B车回杭州还要从鱼川多开约70公里">
+        <g>
+          <text x="0" y="22" class="cd-title">B、C 停终点（采用）</text>
+          <text x="0" y="46" class="cd-sm">下山后各走各的，没有人坐不下</text>
+          <line class="cd-hwy" x1="20" y1="110" x2="440" y2="110"/>
+          <line class="cd-road" x1="320" y1="110" x2="320" y2="210"/>
+          <path class="cd-flow cd-b" d="M328,202 V102 H432" marker-end="url(#cd-ah-b)"/>
+          <path class="cd-flow cd-c" d="M312,202 V118 H30" marker-end="url(#cd-ah-c)"/>
+          <circle class="cd-node cd-key" cx="20" cy="110" r="6"/>
+          <circle class="cd-node" cx="180" cy="110" r="5"/>
+          <circle class="cd-node" cx="320" cy="110" r="5"/>
+          <circle class="cd-node" cx="440" cy="110" r="6"/>
+          <circle class="cd-node cd-key" cx="320" cy="210" r="6"/>
+          <text x="12" y="90" class="cd-sm">鱼川（A 车）</text>
+          <text x="180" y="92" text-anchor="middle" class="cd-sm">昱岭关</text>
+          <text x="306" y="92" text-anchor="middle" class="cd-sm">颊口</text>
+          <text x="440" y="92" text-anchor="middle" class="cd-sm">杭州</text>
+          <text x="334" y="232" class="cd-sm">浙基田</text>
+          <text x="352" y="150" class="cd-tb">B 回家 125 km</text>
+          <text x="60" y="146" class="cd-tc">C 载 4 人 · 5 座够</text>
+        </g>
+        <g transform="translate(500 0)">
+          <text x="0" y="22" class="cd-title">如果 B 停起点</text>
+          <text x="0" y="46" class="cd-sm">下山后浙基田只有 C 一辆车</text>
+          <line class="cd-hwy" x1="20" y1="110" x2="440" y2="110"/>
+          <line class="cd-road" x1="320" y1="110" x2="320" y2="210"/>
+          <path class="cd-flow cd-c" d="M312,202 V118 H30" marker-end="url(#cd-ah-c)"/>
+          <path class="cd-flow cd-b" d="M28,102 H432" marker-end="url(#cd-ah-b)"/>
+          <circle class="cd-node cd-key" cx="20" cy="110" r="6"/>
+          <circle class="cd-node" cx="180" cy="110" r="5"/>
+          <circle class="cd-node" cx="320" cy="110" r="5"/>
+          <circle class="cd-node" cx="440" cy="110" r="6"/>
+          <circle class="cd-node cd-key" cx="320" cy="210" r="6"/>
+          <text x="12" y="90" class="cd-sm">鱼川（A、B 车）</text>
+          <text x="180" y="92" text-anchor="middle" class="cd-sm">昱岭关</text>
+          <text x="306" y="92" text-anchor="middle" class="cd-sm">颊口</text>
+          <text x="440" y="92" text-anchor="middle" class="cd-sm">杭州</text>
+          <text x="334" y="232" class="cd-sm">浙基田</text>
+          <text x="60" y="146" class="cd-tc">C 要载 6 人 · 5 座坐不下</text>
+          <text x="452" y="176" text-anchor="end" class="cd-tb">B 回家多开约 70 km</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>
+      <p>"多开约 70 km"是按手册里程估算的：鱼川到颊口约 79 km（浙基田到鱼川 89 km 减去 10 km 村道），浙基田到颊口只有 10 km。</p>
+    </figcaption>
+  </figure>
+  </div>
   <div class="two">
     <div class="plan">
       <h4>采用 · B、C 留终点，只有 A 去起点</h4>
